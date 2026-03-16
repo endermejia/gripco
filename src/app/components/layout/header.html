@@ -1,0 +1,53 @@
+<header class="glass">
+  <div class="header-content">
+    <div class="logo flex items-center shrink-0 cursor-pointer" routerLink="/">
+      <img src="gripco.svg" alt="GripCo Logo" class="logo-img h-12 md:h-14">
+      <span class="logo-text hidden lg:block text-2xl md:text-3xl font-black ml-3">GripCo</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex items-center gap-2 md:gap-6">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" 
+         class="nav-link-resoling hidden md:flex items-center gap-2 font-bold p-2 rounded-lg transition-colors hover:bg-slate-50">
+        <span class="">{{ i18n.t()['nav.resoling'] }}</span>
+      </a>
+      
+      @if (supabase.user()) {
+        <a routerLink="/orders" routerLinkActive="active" 
+           class="flex items-center gap-2 font-bold p-2 rounded-lg transition-colors hover:bg-slate-50">
+          <lucide-icon [name]="Archive" size="22"></lucide-icon>
+          <span class="hidden md:inline">{{ i18n.t()['nav.orders'] }}</span>
+        </a>
+        @if (supabase.isAdmin()) {
+          <a routerLink="/admin" routerLinkActive="active" 
+             class="flex items-center gap-2 font-bold p-2 rounded-lg transition-colors hover:bg-slate-50">
+            <lucide-icon [name]="Settings" size="22"></lucide-icon>
+            <span class="hidden md:inline">{{ i18n.t()['nav.admin'] }}</span>
+          </a>
+        }
+        <button class="btn-icon p-2 hover:bg-slate-50 rounded-lg" (click)="logout()">
+          <lucide-icon [name]="LogOut" size="22"></lucide-icon>
+        </button>
+      } @else {
+        <a routerLink="/auth" class="btn btn-primary px-3 py-2 md:px-6 md:py-3 text-sm flex items-center">
+          <lucide-icon [name]="User" size="22" class="md:-ml-1"></lucide-icon>
+          <span class="hidden md:inline ml-2">{{ i18n.t()['nav.login'] }}</span>
+        </a>
+      }
+
+      <button class="btn-icon lang-toggle flex items-center gap-1 p-2" (click)="i18n.toggleLang()">
+        <lucide-icon [name]="Languages" size="20"></lucide-icon>
+        <span class="lang-code text-xs font-bold">{{ i18n.lang() | uppercase }}</span>
+      </button>
+
+      <button class="btn-cart relative bg-slate-100 hover:bg-white p-3 rounded-xl transition-all" (click)="cart.toggleCart()">
+        <lucide-icon [name]="ShoppingCart" size="24"></lucide-icon>
+        @if (cart.count() > 0) {
+          <span class="badge absolute -top-1 -right-1 bg-primary text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">
+            {{ cart.count() }}
+          </span>
+        }
+      </button>
+    </nav>
+  </div>
+</header>

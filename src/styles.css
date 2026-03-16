@@ -1,1 +1,191 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@source "./app/**/*.html";
+@source "./app/**/*.ts";
+
+@media (max-width: 1024px) {
+  .logo-text, .nav-link-resoling {
+    display: none !important;
+  }
+}
+
+@theme {
+  --breakpoint-xs: 480px;
+  --color-primary: #cf1381;
+  --color-secondary: #1c4c8a;
+  --ease-premium: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+:root {
+  /* Color Palette - GripCo Branding */
+  --primary: #cf1381;    /* Pink from logo */
+  --primary-dark: #a11064;
+  --secondary: #1c4c8a;  /* Blue from logo */
+  --secondary-dark: #163c6d;
+  --accent: #f5f5f5;
+  --text: #1a1a1a;
+  --text-light: #555;
+  --bg: #ffffff;
+  --bg-subtle: #f0f4f8;
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --shadow-sm: 0 4px 12px rgba(28, 76, 138, 0.08);
+  --shadow-lg: 0 20px 40px rgba(28, 76, 138, 0.12);
+  --radius: 16px;
+  --radius-lg: 24px;
+  --ease-premium: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at top right, #f8fafc, #f1f5f9);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.animate-fade {
+  animation: fadeIn 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Buttons */
+.btn {
+  padding: 14px 28px;
+  border-radius: var(--radius);
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  letter-spacing: -0.2px;
+}
+
+.btn-primary {
+  background: var(--primary) !important;
+  color: white !important;
+  box-shadow: 0 4px 14px rgba(207, 19, 129, 0.3);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark) !important;
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(207, 19, 129, 0.4);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: white;
+  box-shadow: 0 4px 14px rgba(28, 76, 138, 0.3);
+}
+
+.btn-secondary:hover {
+  background: var(--secondary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(28, 76, 138, 0.4);
+}
+
+.card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(28, 76, 138, 0.05);
+  transition: all 0.3s ease;
+}
+
+/* Global Status Badges */
+.order-status, .status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+[data-status="pending_to_gripco"] { background: #fff0f7; color: #cf1381; }
+[data-status="sent_to_gripco"] { background: #eef2ff; color: #1c4c8a; }
+[data-status="received_at_gripco"] { background: #f0fdf4; color: #16a34a; }
+[data-status="resoling"] { background: #fefce8; color: #ca8a04; }
+[data-status="pending_to_client"] { background: #fdf4ff; color: #a21caf; }
+[data-status="sent_to_client"] { background: #f0f9ff; color: #0369a1; }
+[data-status="received_by_client"] { background: #ecfdf5; color: #047857; }
+/* Global Cart Sidebar Logic */
+.cart-sidebar {
+  position: fixed !important;
+  right: 0 !important;
+  top: 0 !important;
+  height: 100vh !important;
+  z-index: 2000 !important;
+  background-color: white !important;
+  box-shadow: var(--shadow-lg) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  transition: transform 0.5s var(--ease-premium), opacity 0.5s var(--ease-premium), visibility 0.5s var(--ease-premium) !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.cart-sidebar.hidden-sidebar {
+  transform: translateX(100%) !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+.cart-sidebar.visible-sidebar {
+  transform: translateX(0) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.cart-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(4px) !important;
+  z-index: 1999 !important;
+  transition: opacity 0.5s var(--ease-premium) !important;
+}
+
+.cart-overlay.hidden-overlay {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.cart-overlay.visible-overlay {
+  opacity: 1 !important;
+}

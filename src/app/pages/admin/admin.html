@@ -1,0 +1,72 @@
+<div class="admin-container animate-fade p-4 md:p-8 max-w-7xl mx-auto">
+  <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+    <h1 class="text-3xl md:text-4xl font-black text-secondary">{{ i18n.t()['admin.title'] }}</h1>
+    <button class="btn btn-secondary px-6" (click)="fetchOrders()" [disabled]="loading()">
+      <lucide-icon [name]="RefreshCw" size="18" [class.spinning]="loading()"></lucide-icon>
+      <span class="ml-2">{{ i18n.t()['admin.refresh'] }}</span>
+    </button>
+  </div>
+
+  <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse min-w-[800px]">
+        <thead>
+          <tr class="bg-slate-50 border-b border-slate-100">
+            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ i18n.t()['admin.id'] }}</th>
+            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ i18n.t()['admin.client'] }}</th>
+            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ i18n.t()['admin.items'] }}</th>
+            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ i18n.t()['admin.total'] }}</th>
+            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ i18n.t()['admin.status'] }}</th>
+            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ i18n.t()['admin.actions'] }}</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          @for (order of orders(); track order.id) {
+            <tr class="hover:bg-slate-50/50 transition-colors">
+              <td class="p-6">
+                <span class="font-bold text-slate-400">#{{ order.id.slice(0, 8) }}</span>
+              </td>
+              <td class="p-6">
+                <div class="flex flex-col">
+                  <span class="font-black text-secondary">{{ order.shipping_address.full_name }}</span>
+                  <span class="text-xs font-bold text-slate-400">{{ order.profiles?.email }}</span>
+                  <span class="text-xs font-bold text-primary mt-1">{{ order.shipping_address.phone }}</span>
+                </div>
+              </td>
+              <td class="p-6">
+                <div class="space-y-1">
+                  @for (item of order.order_items; track item.id) {
+                    <div class="text-sm font-bold text-slate-600 flex items-center gap-2">
+                      <div class="w-1.5 h-1.5 rounded-full bg-primary/40"></div>
+                      {{ item.rubber_type }} {{ item.has_toe_patch ? '(+P)' : '' }}
+                    </div>
+                  }
+                </div>
+              </td>
+              <td class="p-6">
+                <span class="text-lg font-black text-secondary">{{ order.total_price }}€</span>
+              </td>
+              <td class="p-6">
+                <div class="order-status px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider inline-block" 
+                     [attr.data-status]="order.status">
+                  {{ getStatusLabel(order.status) }}
+                </div>
+              </td>
+              <td class="p-6">
+                <div class="relative group">
+                  <select [ngModel]="order.status" (ngModelChange)="updateStatus(order.id, $event)"
+                          class="appearance-none bg-slate-100 border-2 border-transparent hover:border-primary/20 p-3 pr-10 rounded-xl text-xs font-black text-secondary cursor-pointer outline-none transition-all w-full min-w-[180px]">
+                    @for (opt of statusOptions; track opt.value) {
+                      <option [value]="opt.value">{{ i18n.t()[opt.label] }}</option>
+                    }
+                  </select>
+                  <lucide-icon [name]="ChevronDown" size="14" class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400"></lucide-icon>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

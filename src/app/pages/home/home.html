@@ -1,0 +1,40 @@
+<div class="hero-section animate-fade px-4 md:px-10 py-16 md:py-24">
+  <h1 class="text-4xl md:text-6xl font-black mb-6">{{ i18n.t()['hero.title'] }}</h1>
+  <p class="text-xl md:text-2xl opacity-90">{{ i18n.t()['hero.subtitle'] }}</p>
+</div>
+
+<div class="product-config animate-fade max-w-2xl mx-auto px-4">
+  <div class="product-card-single card glass p-6 md:p-10">
+    <div class="product-header mb-8">
+      <h2 class="text-3xl font-bold">{{ i18n.t()['product.title'] }}</h2>
+    </div>
+
+    <div class="config-body space-y-8">
+      <div class="form-group">
+        <label class="block text-sm font-semibold mb-3">{{ i18n.t()['product.select_rubber'] }}</label>
+        <select [ngModel]="selectedRubber()" (ngModelChange)="selectedRubber.set($event)" class="select-modern w-full">
+          @for (option of rubberOptions; track option.name) {
+            <option [ngValue]="option">{{ option.name }} ({{ option.price }}€)</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group bg-slate-50 p-4 rounded-xl border border-slate-100 transition-colors hover:bg-white">
+        <label class="checkbox-container flex items-center cursor-pointer select-none">
+          <input type="checkbox" [ngModel]="selectedToePatch()" (ngModelChange)="selectedToePatch.set($event)" class="hidden">
+          <span class="checkmark mr-3"></span>
+          <span class="font-medium text-slate-700">{{ i18n.t()['product.toe_patch'] }}</span>
+        </label>
+      </div>
+
+      <div class="price-display flex justify-between items-center py-6 border-y border-slate-100">
+        <span class="text-lg font-medium text-slate-600">{{ i18n.t()['product.total_price'] }}</span>
+        <span class="text-4xl font-black text-secondary">{{ currentPrice() }}€</span>
+      </div>
+
+      <button class="btn btn-primary btn-large w-full py-5 text-xl" (click)="addToCart()">
+        {{ i18n.t()['common.add_to_cart'] }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+.admin-container {
+  padding: 40px;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.orders-table {
+  overflow-x: auto;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th {
+  background: var(--bg-subtle);
+  padding: 16px;
+  font-weight: 700;
+  color: var(--secondary);
+  border-bottom: 2px solid var(--glass-border);
+}
+
+td {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+  vertical-align: top;
+}
+
+.client-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.client-info strong {
+  color: var(--secondary);
+}
+
+.client-info span {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.items-list {
+  font-size: 0.9rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.status-badge[data-status="pending_to_gripco"] { background: #fff0f7; color: var(--primary); }
+.status-badge[data-status="sent_to_gripco"] { background: #eef2ff; color: var(--secondary); }
+.status-badge[data-status="received_at_gripco"] { background: #f0fdf4; color: #16a34a; }
+.status-badge[data-status="resoling"] { background: #fefce8; color: #ca8a04; }
+.status-badge[data-status="pending_to_client"] { background: #fdf4ff; color: #a21caf; }
+.status-badge[data-status="sent_to_client"] { background: #f0f9ff; color: #0369a1; }
+.status-badge[data-status="received_by_client"] { background: #ecfdf5; color: #047857; }
+
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+select {
+  appearance: none;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 8px 32px 8px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.select-wrapper lucide-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-light);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}

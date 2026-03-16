@@ -1,0 +1,78 @@
+<!-- Overlay -->
+<div class="cart-overlay" 
+     [class.hidden-overlay]="!cart.isOpen()" 
+     [class.visible-overlay]="cart.isOpen()" 
+     (click)="cart.closeCart()"></div>
+
+<!-- Sidebar -->
+<aside class="cart-sidebar w-full sm:w-[440px] bg-white/95 backdrop-blur-2xl shadow-2xl flex flex-col" 
+       [class.hidden-sidebar]="!cart.isOpen()" 
+       [class.visible-sidebar]="cart.isOpen()" 
+       (click)="$event.stopPropagation()">
+    
+    <!-- Header -->
+    <div class="flex items-center justify-between p-6 border-b border-slate-100">
+      <div class="flex items-center gap-4">
+        <div class="bg-secondary/5 p-3 rounded-2xl text-secondary">
+          <lucide-icon [name]="ShoppingCart" size="24"></lucide-icon>
+        </div>
+        <div class="flex flex-col">
+          <h3 class="text-xl font-black text-secondary leading-tight">{{ i18n.t()['cart.title'] }}</h3>
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">{{ cart.count() }} {{ cart.count() === 1 ? i18n.t()['cart.item'] : i18n.t()['cart.items'] }}</span>
+        </div>
+      </div>
+      <button class="p-3 hover:bg-slate-100 rounded-2xl transition-all duration-300 hover:rotate-90 group" (click)="cart.closeCart()">
+        <lucide-icon [name]="X" size="24" class="text-slate-400 group-hover:text-secondary"></lucide-icon>
+      </button>
+    </div>
+
+    <!-- Items Scroll Area -->
+    <div class="cart-items-container flex-1 overflow-y-auto p-6 space-y-4">
+      @if (cart.items().length === 0) {
+        <div class="flex flex-col items-center justify-center h-full text-center px-10">
+          <div class="bg-slate-50 p-8 rounded-full mb-6">
+            <lucide-icon [name]="ShoppingCart" size="64" class="text-slate-200"></lucide-icon>
+          </div>
+          <p class="text-xl font-black text-secondary mb-2">{{ i18n.t()['cart.empty'] }}</p>
+          <p class="text-sm font-medium text-slate-400">{{ i18n.t()['cart.empty_desc'] }}</p>
+          <button class="btn btn-secondary mt-8 px-8 py-4" (click)="cart.closeCart()">{{ i18n.t()['cart.explore'] }}</button>
+        </div>
+      } @else {
+        @for (item of cart.items(); track item.id) {
+          <div class="group relative flex items-center justify-between p-5 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 animate-fade">
+            <div class="flex flex-col gap-1">
+              <span class="font-black text-secondary text-lg group-hover:text-primary transition-colors">{{ item.rubber }}</span>
+              @if (item.toePatch) {
+                <span class="inline-flex items-center text-[10px] font-black bg-primary/10 text-primary px-2 py-0.5 rounded-full uppercase tracking-tighter w-fit">
+                  + {{ i18n.t()['product.toe_patch'] }}
+                </span>
+              }
+              <span class="text-2xl font-black mt-2 text-secondary">{{ item.itemTotal }}€</span>
+            </div>
+            <button class="p-4 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-2xl transition-all duration-300 transform group-hover:scale-110" 
+                    (click)="cart.removeItem(item.id)">
+              <lucide-icon [name]="Trash2" size="22"></lucide-icon>
+            </button>
+          </div>
+        }
+      }
+    </div>
+
+    <!-- Footer Summary -->
+    @if (cart.items().length > 0) {
+      <div class="p-8 border-t border-slate-100 bg-slate-50/80 backdrop-blur-md">
+        <div class="flex justify-between items-end mb-8">
+          <div class="flex flex-col">
+            <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">{{ i18n.t()['cart.total'] }}</span>
+            <span class="text-4xl font-black text-secondary leading-none">{{ cart.total() }}€</span>
+          </div>
+          <span class="text-xs font-bold text-slate-400 underline decoration-slate-200 underline-offset-4">{{ i18n.t()['cart.shipping_notice'] }}</span>
+        </div>
+        <button class="btn btn-primary w-full py-6 text-xl shadow-2xl shadow-primary/20 flex items-center justify-center gap-3 transition-transform active:scale-95" 
+                (click)="checkout()">
+          <span class="font-black">{{ i18n.t()['cart.checkout'] }}</span>
+          <lucide-icon [name]="ShoppingCart" size="20"></lucide-icon>
+        </button>
+      </div>
+    }
+</aside>
