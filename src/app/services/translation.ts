@@ -1,5 +1,7 @@
-import { Injectable, signal, computed, inject, effect } from '@angular/core';
+import { Injectable, signal, computed, inject, effect, PLATFORM_ID, Optional } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { isPlatformServer } from '@angular/common';
+import { REQUEST } from '@angular/core';
 
 export type Lang = 'es' | 'en';
 
@@ -21,9 +23,13 @@ export class TranslationService {
     });
   }
 
+  private platformId = inject(PLATFORM_ID);
+
   private async loadTranslations(lang: Lang) {
     try {
-      const data = await this.http.get<Record<string, string>>(`/assets/i18n/${lang}.json`).toPromise();
+      const url = `/assets/i18n/${lang}.json`;
+      const data = await this.http.get<Record<string, string>>(url).toPromise();
+
       if (data) {
         this._translations.set(data);
       }
