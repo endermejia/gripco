@@ -36,8 +36,15 @@
           </div>
           <p class="text-xl font-black text-secondary mb-2">{{ i18n.t()['cart.empty'] }}</p>
           <p class="text-sm font-medium text-slate-400">{{ i18n.t()['cart.empty_desc'] }}</p>
-          <button class="bg-transparent border border-secondary text-secondary hover:bg-secondary hover:text-white font-bold rounded-xl mt-8 px-8 py-4 transition-colors" 
+          <button class="bg-transparent border border-secondary text-secondary hover:bg-secondary hover:text-white font-bold rounded-xl mt-8 px-8 py-4 w-full transition-colors"
                   routerLink="/" (click)="cart.closeCart()">{{ i18n.t()['cart.explore'] }}</button>
+          @if (!supabase.user()) {
+            <button class="btn btn-primary w-full py-4 mt-4 text-lg active:scale-95 flex justify-center items-center gap-2"
+                    (click)="login()">
+              <lucide-icon [name]="User" size="20"></lucide-icon>
+              <span class="font-black">{{ i18n.t()['nav.login'] }}</span>
+            </button>
+          }
         </div>
       } @else {
         @for (item of cart.items(); track item.id) {
@@ -70,11 +77,19 @@
           </div>
           <span class="text-xs font-bold text-slate-400 underline decoration-slate-200 underline-offset-4">{{ i18n.t()['cart.shipping_notice'] }}</span>
         </div>
-        <button class="btn btn-primary w-full py-6 text-xl active:scale-95" 
-                (click)="checkout()">
-          <span class="font-black">{{ i18n.t()['cart.checkout'] }}</span>
-          <lucide-icon [name]="ShoppingCart" size="20"></lucide-icon>
-        </button>
+        @if (supabase.user()) {
+          <button class="btn btn-primary w-full py-6 text-xl active:scale-95 flex justify-center items-center gap-2"
+                  (click)="checkout()">
+            <span class="font-black">{{ i18n.t()['cart.checkout'] }}</span>
+            <lucide-icon [name]="ShoppingCart" size="20"></lucide-icon>
+          </button>
+        } @else {
+          <button class="btn btn-primary w-full py-6 text-xl active:scale-95 flex justify-center items-center gap-2"
+                  (click)="login()">
+            <span class="font-black">{{ i18n.t()['nav.login'] }}</span>
+            <lucide-icon [name]="User" size="20"></lucide-icon>
+          </button>
+        }
       </div>
     }
 </aside>
