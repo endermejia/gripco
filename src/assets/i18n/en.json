@@ -51,6 +51,7 @@
   "nav.orders": "My Orders",
   "nav.admin": "Admin",
   "nav.login": "Login",
+  "nav.logout": "Logout",
   "common.loading": "Loading...",
   "status.pending_to_gripco": "Pending Shipment",
   "status.sent_to_gripco": "Sent by Client",

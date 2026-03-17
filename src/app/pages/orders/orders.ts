@@ -29,6 +29,7 @@ export class OrdersComponent {
   readonly CheckCircle = CheckCircle;
   readonly ShoppingCart = ShoppingCart;
   readonly Trash2 = Trash2;
+  readonly LogOut = LogOut;
 
   // Form State
   address = signal('');
@@ -52,6 +53,11 @@ export class OrdersComponent {
         }
       }
     });
+  }
+
+  async logout() {
+    await this.supabase.signOut();
+    this.router.navigate(['/']);
   }
 
   async fetchOrders() {

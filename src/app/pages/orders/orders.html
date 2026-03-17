@@ -163,4 +163,14 @@
       </div>
     }
   </section>
+
+  <!-- Logout Section -->
+  <div class="mt-20 pt-10 border-t border-slate-100 flex flex-col items-center">
+    <button (click)="logout()" 
+            class="flex items-center gap-3 text-slate-400 font-bold px-8 py-4 rounded-2xl hover:bg-red-50 hover:text-red-500 transition-all duration-300 group">
+      <lucide-icon [name]="LogOut" size="20" class="transition-transform group-hover:-translate-x-1"></lucide-icon>
+      <span class="uppercase tracking-widest text-xs">{{ i18n.t()['nav.logout'] }}</span>
+    </button>
+    <p class="mt-4 text-[10px] font-black text-slate-300 uppercase tracking-[0.3em]">Gripco &copy; 2026</p>
+  </div>
 </div>

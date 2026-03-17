@@ -28,13 +28,8 @@ export class HeaderComponent {
 
   readonly ShoppingCart = ShoppingCart;
   readonly User = User;
-  readonly LogOut = LogOut;
-  readonly ShoppingBag = ShoppingBag;
-  readonly Languages = Languages;
   readonly Archive = Archive;
+  readonly Languages = Languages;
   readonly Settings = Settings;
-
-  async logout() {
-    await this.supabase.signOut();
-  }
 }
+

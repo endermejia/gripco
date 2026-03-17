@@ -25,9 +25,6 @@
             <span class="hidden md:inline">{{ i18n.t()['nav.admin'] }}</span>
           </a>
         }
-        <button class="bg-transparent border-none cursor-pointer text-slate-500 p-2 flex transition-colors duration-200 hover:text-primary hover:bg-slate-50 rounded-lg" (click)="logout()">
-          <lucide-icon [name]="LogOut" size="22"></lucide-icon>
-        </button>
       } @else {
         <a routerLink="/auth" class="btn btn-primary rounded-xl px-4 py-2.5 md:px-6 md:py-3 text-[0.95rem] hover:scale-105">
           <lucide-icon [name]="User" size="20"></lucide-icon>
