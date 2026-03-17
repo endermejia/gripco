@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart';
 import { SupabaseService } from '../../services/supabase';
 import { TranslationService } from '../../services/translation';
-import { LucideAngularModule, X, ShoppingCart, Trash2 } from 'lucide-angular';
+import { LucideAngularModule, X, ShoppingCart, Trash2, User } from 'lucide-angular';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
@@ -21,6 +21,12 @@ export class CartSidebarComponent {
   readonly X = X;
   readonly Trash2 = Trash2;
   readonly ShoppingCart = ShoppingCart;
+  readonly User = User;
+
+  login() {
+    this.cart.closeCart();
+    this.router.navigate(['/auth']);
+  }
 
   checkout() {
     this.cart.closeCart();
