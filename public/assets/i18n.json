@@ -1,0 +1,246 @@
+{
+  "home.seo_title": {
+    "es": "GripCo - Resolado de Pies de Gato",
+    "en": "GripCo - Climbing Shoe Resoling"
+  },
+  "home.seo_desc": {
+    "es": "Especialistas en resolado artesanal de pies de gato de escalada. Usamos las mejores gomas: XS Grip, XS Edge y XS Grip2.",
+    "en": "Specialists in handcrafted climbing shoe resoling. We use the best rubbers: XS Grip, XS Edge and XS Grip2."
+  },
+  "hero.title": {
+    "es": "Resolado de Pies de Gato",
+    "en": "Climbing Shoe Resoling"
+  },
+  "hero.subtitle": {
+    "es": "Dale una segunda vida a tus gatos con la mejor goma del mercado.",
+    "en": "Give your shoes a second life with the best rubber on the market."
+  },
+  "hero.cta": {
+    "es": "Configurar mi Resolado",
+    "en": "Set up my Resoling"
+  },
+  "product.title": {
+    "es": "Servicio de Resolado",
+    "en": "Resoling Service"
+  },
+  "product.select_rubber": {
+    "es": "Selecciona la goma:",
+    "en": "Select rubber:"
+  },
+  "product.toe_patch": {
+    "es": "Reparar Punteras",
+    "en": "Repair Toe Patches"
+  },
+  "product.total_price": {
+    "es": "Precio Total:",
+    "en": "Total Price:"
+  },
+  "cart.title": {
+    "es": "Tu Carrito",
+    "en": "Your Cart"
+  },
+  "cart.empty": {
+    "es": "Tu carrito está vacío",
+    "en": "Your cart is empty"
+  },
+  "cart.total": {
+    "es": "Total",
+    "en": "Total"
+  },
+  "cart.checkout": {
+    "es": "Tramitar Pedido",
+    "en": "Checkout"
+  },
+  "cart.item": {
+    "es": "item",
+    "en": "item"
+  },
+  "cart.items": {
+    "es": "items",
+    "en": "items"
+  },
+  "cart.explore": {
+    "es": "Explorar Gomas",
+    "en": "Explore Rubber"
+  },
+  "cart.empty_desc": {
+    "es": "¡Añade algún resolado para empezar!",
+    "en": "Add some resoling to start!"
+  },
+  "cart.shipping_notice": {
+    "es": "Gastos de envío incluidos",
+    "en": "Shipping expenses included"
+  },
+  "cart.shipping_included": {
+    "es": "Gastos de envío incluidos",
+    "en": "Shipping included"
+  },
+  "common.add_to_cart": {
+    "es": "Añadir",
+    "en": "Add"
+  },
+  "auth.login": {
+    "es": "Iniciar Sesión",
+    "en": "Login"
+  },
+  "auth.register": {
+    "es": "Registrarse",
+    "en": "Register"
+  },
+  "auth.no_account": {
+    "es": "¿No tienes cuenta?",
+    "en": "Don't have an account?"
+  },
+  "auth.has_account": {
+    "es": "¿Ya tienes cuenta?",
+    "en": "Already have an account?"
+  },
+  "auth.go_to_register": {
+    "es": "Regístrate",
+    "en": "Register here"
+  },
+  "auth.go_to_login": {
+    "es": "Inicia sesión",
+    "en": "Login here"
+  },
+  "auth.email": {
+    "es": "Email",
+    "en": "Email"
+  },
+  "auth.password": {
+    "es": "Contraseña",
+    "en": "Password"
+  },
+  "auth.name": {
+    "es": "Nombre Completo",
+    "en": "Full Name"
+  },
+  "orders.title": {
+    "es": "Mis Pedidos",
+    "en": "My Orders"
+  },
+  "orders.submit": {
+    "es": "Confirmar y Pagar",
+    "en": "Confirm and Pay"
+  },
+  "orders.subtitle": {
+    "es": "Completa tus datos para enviarnos tus pies de gato y comenzar el proceso de resolado.",
+    "en": "Complete your details to send us your climbing shoes and start the resoling process."
+  },
+  "orders.order_id": {
+    "es": "Nº Pedido",
+    "en": "Order ID"
+  },
+  "orders.order_date": {
+    "es": "Fecha",
+    "en": "Date"
+  },
+  "orders.total_paid": {
+    "es": "Total Pagado",
+    "en": "Total Paid"
+  },
+  "orders.shipping_address": {
+    "es": "Dirección de Envío",
+    "en": "Shipping Address"
+  },
+  "orders.phone": {
+    "es": "Teléfono",
+    "en": "Phone"
+  },
+  "orders.processing": {
+    "es": "Procesando...",
+    "en": "Processing..."
+  },
+  "orders.summary": {
+    "es": "Resumen del Pedido",
+    "en": "Order Summary"
+  },
+  "orders.toe_patch": {
+    "es": "+ Puntera",
+    "en": "+ Toe Patch"
+  },
+  "orders.empty_title": {
+    "es": "Tu historial está vacío",
+    "en": "Your history is empty"
+  },
+  "orders.empty_desc": {
+    "es": "Cuando realices tu primer pedido aparecerá aquí para que puedas seguir su estado.",
+    "en": "When you make your first order it will appear here so you can track its status."
+  },
+  "orders.history_cta": {
+    "es": "Configurar mi Resolado",
+    "en": "Set up my Resoling"
+  },
+  "orders.loading": {
+    "es": "Cargando Pedidos",
+    "en": "Loading Orders"
+  },
+  "admin.title": {
+    "es": "Gestión de Pedidos",
+    "en": "Order Management"
+  },
+  "admin.refresh": {
+    "es": "Actualizar",
+    "en": "Refresh"
+  },
+  "admin.client": {
+    "es": "Cliente",
+    "en": "Client"
+  },
+  "admin.actions": {
+    "es": "Acciones",
+    "en": "Actions"
+  },
+  "nav.resoling": {
+    "es": "Resolado",
+    "en": "Resoling"
+  },
+  "nav.orders": {
+    "es": "Mis Pedidos",
+    "en": "My Orders"
+  },
+  "nav.admin": {
+    "es": "Admin",
+    "en": "Admin"
+  },
+  "nav.login": {
+    "es": "Entrar",
+    "en": "Login"
+  },
+  "nav.logout": {
+    "es": "Cerrar Sesión",
+    "en": "Logout"
+  },
+  "common.loading": {
+    "es": "Cargando...",
+    "en": "Loading..."
+  },
+  "status.pending_to_gripco": {
+    "es": "Pendiente de Enviar",
+    "en": "Pending Shipment"
+  },
+  "status.sent_to_gripco": {
+    "es": "Enviado por Cliente",
+    "en": "Sent by Client"
+  },
+  "status.received_at_gripco": {
+    "es": "Recibido en GripCo",
+    "en": "Received at GripCo"
+  },
+  "status.resoling": {
+    "es": "En Resolado",
+    "en": "Resoling in Progress"
+  },
+  "status.pending_to_client": {
+    "es": "Listo para Envío",
+    "en": "Ready for Client"
+  },
+  "status.sent_to_client": {
+    "es": "Enviado a Cliente",
+    "en": "Sent to Client"
+  },
+  "status.received_by_client": {
+    "es": "Entregado",
+    "en": "Delivered"
+  }
+}

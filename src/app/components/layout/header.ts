@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { SupabaseService } from '../../services/supabase';
 import { CartService } from '../../services/cart';
 import { TranslationService } from '../../services/translation';
+import { TranslatePipe } from '../../services/translate.pipe';
 import { 
   LucideAngularModule, 
   ShoppingCart, 
@@ -18,7 +19,7 @@ import {
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule, LucideAngularModule],
+  imports: [CommonModule, RouterModule, LucideAngularModule, TranslatePipe],
   templateUrl: './header.html'
 })
 export class HeaderComponent {

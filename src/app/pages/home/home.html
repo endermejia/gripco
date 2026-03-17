@@ -6,21 +6,21 @@
   </div>
   
   <div class="relative z-10 w-full max-w-4xl mx-auto">
-    <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-6 text-white tracking-tight drop-shadow-xl">{{ i18n.t()['hero.title'] }}</h1>
-    <p class="text-xl md:text-2xl text-slate-100 max-w-[800px] mx-auto leading-relaxed font-medium drop-shadow-md">{{ i18n.t()['hero.subtitle'] }}</p>
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-6 text-white tracking-tight drop-shadow-xl">{{ 'hero.title' | translate }}</h1>
+    <p class="text-xl md:text-2xl text-slate-100 max-w-[800px] mx-auto leading-relaxed font-medium drop-shadow-md">{{ 'hero.subtitle' | translate }}</p>
   </div>
 </div>
 
 <!-- Configurator Section -->
 <div class="animate-fade max-w-5xl mx-auto px-4 pb-[80px]">
   <div class="mb-12 text-center">
-    <h2 class="text-3xl md:text-5xl font-black text-secondary">{{ i18n.t()['product.title'] }}</h2>
+    <h2 class="text-3xl md:text-5xl font-black text-secondary">{{ 'product.title' | translate }}</h2>
     <div class="h-1.5 w-24 bg-primary rounded-full mx-auto mt-6"></div>
   </div>
 
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
     <!-- Visual Display Side -->
-    <div class="hidden lg:block lg:col-span-5 sticky top-24">
+    <div class="lg:col-span-5 lg:sticky lg:top-24">
       <div class="card bg-white p-4 rounded-3xl shadow-xl border border-slate-100 relative overflow-hidden group">
         <div class="aspect-square rounded-2xl overflow-hidden bg-slate-50 relative">
           <!-- Dynamic Image Based on Selection -->
@@ -49,7 +49,7 @@
       <div class="flex flex-col gap-8">
         <!-- Rubber Selection Section -->
         <div class="flex flex-col gap-4">
-          <label class="block font-black text-secondary text-lg uppercase tracking-tight">{{ i18n.t()['product.select_rubber'] }}</label>
+          <label class="block font-black text-secondary text-lg uppercase tracking-tight">{{ 'product.select_rubber' | translate }}</label>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             @for (option of rubberOptions; track option.name) {
@@ -89,7 +89,7 @@
                 <img src="puntera.jpg" class="w-full h-full object-cover">
               </div>
               <div class="flex flex-col">
-                <span class="font-black text-secondary">{{ i18n.t()['product.toe_patch'] }}</span>
+                <span class="font-black text-secondary">{{ 'product.toe_patch' | translate }}</span>
                 <span class="text-xs font-medium text-slate-500 mt-1">Reconstrucción de la zona desgastada</span>
               </div>
             </div>
@@ -112,7 +112,7 @@
           
           <div class="relative z-10 flex flex-col md:flex-row md:justify-between md:items-center gap-6">
             <div class="flex flex-col">
-              <span class="text-slate-400 font-bold tracking-widest uppercase text-xs mb-1">{{ i18n.t()['product.total_price'] }}</span>
+              <span class="text-slate-400 font-bold tracking-widest uppercase text-xs mb-1">{{ 'product.total_price' | translate }}</span>
               <div class="flex items-end gap-2">
                 <span class="text-4xl md:text-5xl font-black font-mono leading-none">{{ currentPrice() }}</span>
                 <span class="text-2xl font-bold text-slate-400 leading-tight">€</span>
@@ -120,7 +120,7 @@
             </div>
             
             <button class="btn btn-primary w-full md:w-auto px-10 py-4 md:py-5 text-lg rounded-2xl hover:scale-105" (click)="addToCart()">
-              {{ i18n.t()['common.add_to_cart'] }}
+              {{ 'common.add_to_cart' | translate }}
               <lucide-icon [name]="ShoppingCart" size="20" class="ml-1 opacity-90"></lucide-icon>
             </button>
           </div>

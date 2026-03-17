@@ -9,20 +9,20 @@
     <nav class="flex items-center gap-6">
       <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" 
          class="text-slate-500 font-bold hidden md:flex items-center gap-2 p-2 rounded-lg transition-all duration-300 relative text-[1.05rem] hover:text-secondary hover:bg-slate-50 [&.active]:text-secondary [&.active]:bg-[rgba(28,76,138,0.05)] after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full [&.active]:after:w-full">
-        <span>{{ i18n.t()['nav.resoling'] }}</span>
+        <span>{{ 'nav.resoling' | translate }}</span>
       </a>
       
       @if (supabase.user()) {
         <a routerLink="/orders" routerLinkActive="active" 
            class="text-slate-500 font-bold flex items-center gap-2 p-2 rounded-lg transition-all duration-300 relative text-[1.05rem] hover:text-secondary hover:bg-slate-50 [&.active]:text-secondary [&.active]:bg-[rgba(28,76,138,0.05)] after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full [&.active]:after:w-full">
           <lucide-icon [name]="Archive" size="22"></lucide-icon>
-          <span class="hidden md:inline">{{ i18n.t()['nav.orders'] }}</span>
+          <span class="hidden md:inline">{{ 'nav.orders' | translate }}</span>
         </a>
         @if (supabase.isAdmin()) {
           <a routerLink="/admin" routerLinkActive="active" 
              class="text-slate-500 font-bold flex items-center gap-2 p-2 rounded-lg transition-all duration-300 relative text-[1.05rem] hover:text-secondary hover:bg-slate-50 [&.active]:text-secondary [&.active]:bg-[rgba(28,76,138,0.05)] after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full [&.active]:after:w-full">
             <lucide-icon [name]="Settings" size="22"></lucide-icon>
-            <span class="hidden md:inline">{{ i18n.t()['nav.admin'] }}</span>
+            <span class="hidden md:inline">{{ 'nav.admin' | translate }}</span>
           </a>
         }
       }

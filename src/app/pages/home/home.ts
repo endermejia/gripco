@@ -6,11 +6,12 @@ import { Meta, Title } from '@angular/platform-browser';
 import { CartService } from '../../services/cart';
 import { SupabaseService } from '../../services/supabase';
 import { TranslationService } from '../../services/translation';
+import { TranslatePipe } from '../../services/translate.pipe';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, LucideAngularModule],
+  imports: [CommonModule, FormsModule, LucideAngularModule, TranslatePipe],
   templateUrl: './home.html'
 })
 export class HomeComponent {
@@ -31,8 +32,8 @@ export class HomeComponent {
 
   constructor() {
     effect(() => {
-      this.title.setTitle(this.i18n.t()['home.seo_title']);
-      this.meta.updateTag({ name: 'description', content: this.i18n.t()['home.seo_desc'] });
+      this.title.setTitle(this.i18n.translate('home.seo_title'));
+      this.meta.updateTag({ name: 'description', content: this.i18n.translate('home.seo_desc') });
     });
   }
 

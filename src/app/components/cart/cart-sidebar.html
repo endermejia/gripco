@@ -18,8 +18,8 @@
           <lucide-icon [name]="ShoppingCart" size="24"></lucide-icon>
         </div>
         <div class="flex flex-col">
-          <h3 class="text-xl font-black text-secondary leading-tight">{{ i18n.t()['cart.title'] }}</h3>
-          <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">{{ cart.count() }} {{ cart.count() === 1 ? i18n.t()['cart.item'] : i18n.t()['cart.items'] }}</span>
+          <h3 class="text-xl font-black text-secondary leading-tight">{{ 'cart.title' | translate }}</h3>
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">{{ cart.count() }} {{ cart.count() === 1 ? ('cart.item' | translate) : ('cart.items' | translate) }}</span>
         </div>
       </div>
       <button class="bg-transparent border-none cursor-pointer p-3 hover:bg-slate-100 rounded-2xl transition-all duration-300 hover:rotate-90 group" (click)="cart.closeCart()">
@@ -34,15 +34,15 @@
           <div class="bg-slate-50 p-8 rounded-full mb-6">
             <lucide-icon [name]="ShoppingCart" size="64" class="text-slate-200"></lucide-icon>
           </div>
-          <p class="text-xl font-black text-secondary mb-2">{{ i18n.t()['cart.empty'] }}</p>
-          <p class="text-sm font-medium text-slate-400">{{ i18n.t()['cart.empty_desc'] }}</p>
+          <p class="text-xl font-black text-secondary mb-2">{{ 'cart.empty' | translate }}</p>
+          <p class="text-sm font-medium text-slate-400">{{ 'cart.empty_desc' | translate }}</p>
           <button class="bg-transparent border border-secondary text-secondary hover:bg-secondary hover:text-white font-bold rounded-xl mt-8 px-8 py-4 w-full transition-colors"
-                  routerLink="/" (click)="cart.closeCart()">{{ i18n.t()['cart.explore'] }}</button>
+                  routerLink="/" (click)="cart.closeCart()">{{ 'cart.explore' | translate }}</button>
           @if (!supabase.user()) {
             <button class="btn btn-primary w-full py-4 mt-4 text-lg active:scale-95 flex justify-center items-center gap-2"
                     (click)="login()">
               <lucide-icon [name]="User" size="20"></lucide-icon>
-              <span class="font-black">{{ i18n.t()['nav.login'] }}</span>
+              <span class="font-black">{{ 'nav.login' | translate }}</span>
             </button>
           }
         </div>
@@ -53,7 +53,7 @@
               <span class="font-black text-secondary text-lg group-hover:text-primary transition-colors">{{ item.rubber }}</span>
               @if (item.toePatch) {
                 <span class="inline-flex items-center text-[10px] font-black bg-primary/10 text-primary px-2 py-0.5 rounded-full uppercase tracking-tighter w-fit">
-                  + {{ i18n.t()['product.toe_patch'] }} (+{{ cart.TOE_PATCH_PRICE }}€)
+                  + {{ 'product.toe_patch' | translate }} (+{{ cart.TOE_PATCH_PRICE }}€)
                 </span>
               }
               <span class="text-2xl font-black mt-2 text-secondary">{{ item.itemTotal }}€</span>
@@ -72,21 +72,21 @@
       <div class="p-8 border-t border-slate-100 bg-slate-50/80 backdrop-blur-md">
         <div class="flex justify-between items-end mb-8">
           <div class="flex flex-col">
-            <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">{{ i18n.t()['cart.total'] }}</span>
+            <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">{{ 'cart.total' | translate }}</span>
             <span class="text-4xl font-black text-secondary leading-none">{{ cart.total() }}€</span>
           </div>
-          <span class="text-xs font-bold text-slate-400 underline decoration-slate-200 underline-offset-4">{{ i18n.t()['cart.shipping_notice'] }}</span>
+          <span class="text-xs font-bold text-slate-400 underline decoration-slate-200 underline-offset-4">{{ 'cart.shipping_notice' | translate }}</span>
         </div>
         @if (supabase.user()) {
           <button class="btn btn-primary w-full py-6 text-xl active:scale-95 flex justify-center items-center gap-2"
                   (click)="checkout()">
-            <span class="font-black">{{ i18n.t()['cart.checkout'] }}</span>
+            <span class="font-black">{{ 'cart.checkout' | translate }}</span>
             <lucide-icon [name]="ShoppingCart" size="20"></lucide-icon>
           </button>
         } @else {
           <button class="btn btn-primary w-full py-6 text-xl active:scale-95 flex justify-center items-center gap-2"
                   (click)="login()">
-            <span class="font-black">{{ i18n.t()['nav.login'] }}</span>
+            <span class="font-black">{{ 'nav.login' | translate }}</span>
             <lucide-icon [name]="User" size="20"></lucide-icon>
           </button>
         }

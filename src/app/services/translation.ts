@@ -11,42 +11,38 @@ export type Lang = 'es' | 'en';
 export class TranslationService {
   private http = inject(HttpClient);
   private _lang = signal<Lang>('es');
-  private _translations = signal<Record<string, string>>({});
+  private _translations = signal<Record<string, Record<Lang, string>>>({});
 
-  lang = computed(() => this._lang());
-  t = computed(() => this._translations());
-
+  lang = signal<Lang>('es');
+  
   constructor() {
-    // Load translations whenever language changes
-    effect(() => {
-      this.loadTranslations(this._lang());
-    });
+    this.loadTranslations();
   }
 
-  private platformId = inject(PLATFORM_ID);
-
-  private async loadTranslations(lang: Lang) {
+  private async loadTranslations() {
     try {
-      const url = `/assets/i18n/${lang}.json`;
-      const data = await this.http.get<Record<string, string>>(url).toPromise();
+      const url = '/assets/i18n.json';
+      const data = await this.http.get<Record<string, Record<Lang, string>>>(url).toPromise();
 
       if (data) {
         this._translations.set(data);
       }
     } catch (error) {
-      console.error(`Could not load translations for ${lang}`, error);
+      console.error(`Could not load translations`, error);
     }
   }
 
   setLang(lang: Lang) {
-    this._lang.set(lang);
+    this.lang.set(lang);
   }
 
   toggleLang() {
-    this._lang.update(l => l === 'es' ? 'en' : 'es');
+    this.lang.update(l => l === 'es' ? 'en' : 'es');
   }
 
   translate(key: string): string {
-    return this.t()[key] || key;
+    const entry = this._translations()[key];
+    if (!entry) return key;
+    return entry[this.lang()] || entry['es'] || key;
   }
 }

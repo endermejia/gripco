@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SupabaseService } from '../../services/supabase';
 import { TranslationService } from '../../services/translation';
+import { TranslatePipe } from '../../services/translate.pipe';
 import { Router } from '@angular/router';
 import { LucideAngularModule, Loader2 } from 'lucide-angular';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [CommonModule, FormsModule, LucideAngularModule],
+  imports: [CommonModule, FormsModule, LucideAngularModule, TranslatePipe],
   templateUrl: './auth.html'
 })
 export class AuthComponent {

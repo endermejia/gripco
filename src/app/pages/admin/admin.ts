@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SupabaseService } from '../../services/supabase';
 import { TranslationService } from '../../services/translation';
+import { TranslatePipe } from '../../services/translate.pipe';
 import { LucideAngularModule, RefreshCw, ChevronDown } from 'lucide-angular';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, FormsModule, LucideAngularModule],
+  imports: [CommonModule, FormsModule, LucideAngularModule, TranslatePipe],
   templateUrl: './admin.html'
 })
 export class AdminComponent implements OnInit {
@@ -62,7 +63,7 @@ export class AdminComponent implements OnInit {
   }
 
   getStatusLabel(status: string): string {
-    return this.i18n.t()[`status.${status}`] || status;
+    return this.i18n.translate(`status.${status}`);
   }
 
   getStatusClasses(status: string): string {

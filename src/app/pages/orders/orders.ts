@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { SupabaseService } from '../../services/supabase';
 import { CartService } from '../../services/cart';
 import { TranslationService } from '../../services/translation';
+import { TranslatePipe } from '../../services/translate.pipe';
 import { LucideAngularModule, MapPin, Phone, User, Package, Clock, Truck, CheckCircle, ShoppingCart, Trash2, Archive, Settings, LogOut } from 'lucide-angular';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [CommonModule, FormsModule, LucideAngularModule, RouterModule, DatePipe],
+  imports: [CommonModule, FormsModule, LucideAngularModule, RouterModule, DatePipe, TranslatePipe],
   templateUrl: './orders.html'
 })
 export class OrdersComponent {
@@ -121,7 +122,7 @@ export class OrdersComponent {
   }
 
   getStatusLabel(status: string): string {
-    return this.i18n.t()[`status.${status}`] || status;
+    return this.i18n.translate(`status.${status}`);
   }
 
   getStatusClasses(status: string): string {

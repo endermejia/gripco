@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart';
 import { SupabaseService } from '../../services/supabase';
 import { TranslationService } from '../../services/translation';
+import { TranslatePipe } from '../../services/translate.pipe';
 import { LucideAngularModule, X, ShoppingCart, Trash2, User } from 'lucide-angular';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cart-sidebar',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule, RouterModule],
+  imports: [CommonModule, LucideAngularModule, RouterModule, TranslatePipe],
   templateUrl: './cart-sidebar.html'
 })
 export class CartSidebarComponent {

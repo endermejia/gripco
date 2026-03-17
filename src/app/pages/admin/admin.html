@@ -1,9 +1,9 @@
 <div class="animate-fade p-4 md:p-8 max-w-7xl mx-auto">
   <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
-    <h1 class="text-3xl md:text-4xl font-black text-secondary">{{ i18n.t()['admin.title'] }}</h1>
+    <h1 class="text-3xl md:text-4xl font-black text-secondary">{{ 'admin.title' | translate }}</h1>
     <button class="btn btn-secondary px-6" (click)="fetchOrders()" [disabled]="loading()">
       <lucide-icon [name]="RefreshCw" size="18" [class.animate-spin]="loading()"></lucide-icon>
-      <span class="ml-2">{{ i18n.t()['admin.refresh'] }}</span>
+      <span class="ml-2">{{ 'admin.refresh' | translate }}</span>
     </button>
   </div>
 
@@ -12,12 +12,12 @@
       <table class="w-full text-left border-collapse min-w-[800px]">
         <thead>
           <tr class="bg-slate-50 border-b border-slate-100">
-            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ i18n.t()['admin.id'] }}</th>
-            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ i18n.t()['admin.client'] }}</th>
-            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ i18n.t()['admin.items'] }}</th>
-            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ i18n.t()['admin.total'] }}</th>
-            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ i18n.t()['admin.status'] }}</th>
-            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ i18n.t()['admin.actions'] }}</th>
+            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ 'admin.id' | translate }}</th>
+            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ 'admin.client' | translate }}</th>
+            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ 'admin.items' | translate }}</th>
+            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ 'admin.total' | translate }}</th>
+            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ 'admin.status' | translate }}</th>
+            <th class="p-6 text-sm font-black text-slate-400 uppercase tracking-widest">{{ 'admin.actions' | translate }}</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-slate-100">
@@ -57,7 +57,7 @@
                   <select [ngModel]="order.status" (ngModelChange)="updateStatus(order.id, $event)"
                           class="appearance-none bg-slate-100 border-2 border-transparent hover:border-primary/20 p-3 pr-10 rounded-xl text-xs font-black text-secondary cursor-pointer outline-none transition-all w-full min-w-[180px]">
                     @for (opt of statusOptions; track opt.value) {
-                      <option [value]="opt.value">{{ i18n.t()[opt.label] }}</option>
+                      <option [value]="opt.value">{{ opt.label | translate }}</option>
                     }
                   </select>
                   <lucide-icon [name]="ChevronDown" size="14" class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400"></lucide-icon>
