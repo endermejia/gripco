@@ -4,12 +4,12 @@ import { CartService } from '../../services/cart';
 import { SupabaseService } from '../../services/supabase';
 import { TranslationService } from '../../services/translation';
 import { LucideAngularModule, X, ShoppingCart, Trash2 } from 'lucide-angular';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cart-sidebar',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, RouterModule],
   templateUrl: './cart-sidebar.html'
 })
 export class CartSidebarComponent {
@@ -23,12 +23,11 @@ export class CartSidebarComponent {
   readonly ShoppingCart = ShoppingCart;
 
   checkout() {
+    this.cart.closeCart();
     if (!this.supabase.user()) {
-      this.cart.closeCart();
       this.router.navigate(['/auth']);
     } else {
-      // Logic for creating order with Stripe
-      console.log('Proceeding to checkout...');
+      this.router.navigate(['/orders']);
     }
   }
 }

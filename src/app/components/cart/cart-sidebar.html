@@ -36,7 +36,8 @@
           </div>
           <p class="text-xl font-black text-secondary mb-2">{{ i18n.t()['cart.empty'] }}</p>
           <p class="text-sm font-medium text-slate-400">{{ i18n.t()['cart.empty_desc'] }}</p>
-          <button class="bg-transparent border border-secondary text-secondary hover:bg-secondary hover:text-white font-bold rounded-xl mt-8 px-8 py-4 transition-colors" (click)="cart.closeCart()">{{ i18n.t()['cart.explore'] }}</button>
+          <button class="bg-transparent border border-secondary text-secondary hover:bg-secondary hover:text-white font-bold rounded-xl mt-8 px-8 py-4 transition-colors" 
+                  routerLink="/" (click)="cart.closeCart()">{{ i18n.t()['cart.explore'] }}</button>
         </div>
       } @else {
         @for (item of cart.items(); track item.id) {
