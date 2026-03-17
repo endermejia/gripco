@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SupabaseService } from '../../services/supabase';
 import { TranslationService } from '../../services/translation';
+import { ModalService } from '../../services/modal';
 import { TranslatePipe } from '../../services/translate.pipe';
 import { LucideAngularModule, RefreshCw, ChevronDown } from 'lucide-angular';
 
@@ -15,6 +16,7 @@ import { LucideAngularModule, RefreshCw, ChevronDown } from 'lucide-angular';
 export class AdminComponent implements OnInit {
   supabase = inject(SupabaseService);
   i18n = inject(TranslationService);
+  private modal = inject(ModalService);
   
   readonly RefreshCw = RefreshCw;
   readonly ChevronDown = ChevronDown;
@@ -56,7 +58,11 @@ export class AdminComponent implements OnInit {
       .eq('id', orderId);
 
     if (error) {
-      alert('Error actualizando estado: ' + error.message);
+      this.modal.show({
+        title: 'Error',
+        message: 'Error actualizando estado: ' + error.message,
+        type: 'error'
+      });
     } else {
       this.fetchOrders();
     }

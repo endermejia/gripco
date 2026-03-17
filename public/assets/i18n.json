@@ -215,6 +215,14 @@
     "es": "Cargando...",
     "en": "Loading..."
   },
+  "common.accept": {
+    "es": "Aceptar",
+    "en": "Accept"
+  },
+  "common.cancel": {
+    "es": "Cancelar",
+    "en": "Cancel"
+  },
   "status.pending_to_gripco": {
     "es": "Pendiente de Enviar",
     "en": "Pending Shipment"
@@ -242,5 +250,61 @@
   "status.received_by_client": {
     "es": "Entregado",
     "en": "Delivered"
+  },
+  "auth.forgot_password": {
+    "es": "¿Has olvidado tu contraseña?",
+    "en": "Forgot your password?"
+  },
+  "auth.reset_password": {
+    "es": "Recuperar Contraseña",
+    "en": "Reset Password"
+  },
+  "auth.send_reset_link": {
+    "es": "Enviar enlace de recuperación",
+    "en": "Send recovery link"
+  },
+  "auth.reset_success": {
+    "es": "Enlace enviado. Revisa tu correo.",
+    "en": "Link sent. Check your email."
+  },
+  "auth.new_password": {
+    "es": "Nueva Contraseña",
+    "en": "New Password"
+  },
+  "auth.update_password": {
+    "es": "Actualizar Contraseña",
+    "en": "Update Password"
+  },
+  "auth.password_updated": {
+    "es": "Contraseña actualizada correctamente.",
+    "en": "Password updated successfully."
+  },
+  "auth.back_to_login": {
+    "es": "Volver al inicio de sesión",
+    "en": "Back to login"
+  },
+  "orders.cancel": {
+    "es": "Cancelar Pedido",
+    "en": "Cancel Order"
+  },
+  "orders.cancel_confirm": {
+    "es": "¿Estás seguro de que quieres cancelar este pedido?",
+    "en": "Are you sure you want to cancel this order?"
+  },
+  "orders.cancelled_success": {
+    "es": "Pedido cancelado correctamente.",
+    "en": "Order cancelled successfully."
+  },
+  "status.cancelled": {
+    "es": "Cancelado",
+    "en": "Cancelled"
+  },
+  "orders.discard": {
+    "es": "Vaciar carrito",
+    "en": "Clear cart"
+  },
+  "orders.discard_confirm": {
+    "es": "¿Quieres vaciar tu carrito y cancelar el proceso de compra?",
+    "en": "Do you want to clear your cart and cancel the checkout process?"
   }
 }

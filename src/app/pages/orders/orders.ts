@@ -4,8 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { SupabaseService } from '../../services/supabase';
 import { CartService } from '../../services/cart';
 import { TranslationService } from '../../services/translation';
+import { ModalService } from '../../services/modal';
 import { TranslatePipe } from '../../services/translate.pipe';
-import { LucideAngularModule, MapPin, Phone, User, Package, Clock, Truck, CheckCircle, ShoppingCart, Trash2, Archive, Settings, LogOut } from 'lucide-angular';
+import { LucideAngularModule, MapPin, Phone, User, Package, Clock, Truck, CheckCircle, ShoppingCart, Trash2, Archive, Settings, LogOut, XCircle } from 'lucide-angular';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
@@ -18,6 +19,7 @@ export class OrdersComponent {
   supabase = inject(SupabaseService);
   cart = inject(CartService);
   i18n = inject(TranslationService);
+  private modal = inject(ModalService);
   private router = inject(Router);
 
   // Icons
@@ -31,6 +33,7 @@ export class OrdersComponent {
   readonly ShoppingCart = ShoppingCart;
   readonly Trash2 = Trash2;
   readonly LogOut = LogOut;
+  readonly XCircle = XCircle;
 
   // Form State
   address = signal('');
@@ -113,11 +116,63 @@ export class OrdersComponent {
       // 3. Clear cart and refresh
       this.cart.clearCart();
       await this.fetchOrders();
-      alert('Pedido realizado con éxito. Por favor, envía tus pies de gato a nuestra dirección.');
+      this.modal.show({
+        title: this.i18n.translate('orders.summary'),
+        message: 'Pedido realizado con éxito. Por favor, envía tus pies de gato a nuestra dirección.',
+        type: 'success'
+      });
     } catch (e: any) {
-      alert('Error: ' + e.message);
+      this.modal.show({
+        title: 'Error',
+        message: e.message,
+        type: 'error'
+      });
     } finally {
       this.loading.set(false);
+    }
+  }
+
+  async cancelOrder(orderId: string) {
+    const confirmed = await this.modal.show({
+      title: this.i18n.translate('orders.cancel'),
+      message: this.i18n.translate('orders.cancel_confirm'),
+      type: 'confirm'
+    });
+
+    if (!confirmed) return;
+
+    try {
+      const { error } = await this.supabase.client
+        .from('orders')
+        .update({ status: 'cancelled' })
+        .eq('id', orderId);
+
+      if (error) throw error;
+      
+      this.modal.show({
+        title: 'GripCo',
+        message: this.i18n.translate('orders.cancelled_success'),
+        type: 'success'
+      });
+      await this.fetchOrders();
+    } catch (e: any) {
+      this.modal.show({
+        title: 'Error',
+        message: e.message,
+        type: 'error'
+      });
+    }
+  }
+
+  async clearCart() {
+    const confirmed = await this.modal.show({
+      title: this.i18n.translate('orders.discard'),
+      message: this.i18n.translate('orders.discard_confirm'),
+      type: 'confirm'
+    });
+
+    if (confirmed) {
+      this.cart.clearCart();
     }
   }
 
@@ -133,7 +188,8 @@ export class OrdersComponent {
       'resoling': 'bg-yellow-50 text-yellow-600',
       'pending_to_client': 'bg-fuchsia-50 text-fuchsia-700',
       'sent_to_client': 'bg-sky-50 text-sky-700',
-      'received_by_client': 'bg-emerald-50 text-emerald-700'
+      'received_by_client': 'bg-emerald-50 text-emerald-700',
+      'cancelled': 'bg-red-50 text-red-600'
     };
     return map[status] || 'bg-slate-100 text-slate-500';
   }
