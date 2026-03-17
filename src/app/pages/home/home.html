@@ -61,7 +61,7 @@
                   <div class="flex justify-between items-start mb-2">
                     <span class="font-black text-secondary leading-tight">{{ option.name }}</span>
                     <!-- Radio Indicator -->
-                    <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 
+                    <div class="w-5 h-5 rounded-full border-2 hidden md:flex items-center justify-center shrink-0
                                 {{ selectedRubber().name === option.name ? 'border-primary' : 'border-slate-300' }}">
                       @if (selectedRubber().name === option.name) {
                         <div class="w-2.5 h-2.5 bg-primary rounded-full animate-fade-in"></div>
@@ -96,7 +96,7 @@
             
             <div class="flex items-center gap-4">
               <span class="font-bold text-slate-500">+{{ cart.TOE_PATCH_PRICE }}€</span>
-              <div class="w-10 h-6 rounded-full p-1 transition-colors duration-300 {{ selectedToePatch() ? 'bg-primary' : 'bg-slate-200' }}">
+              <div class="w-10 h-6 rounded-full p-1 transition-colors duration-300 hidden md:block {{ selectedToePatch() ? 'bg-primary' : 'bg-slate-200' }}">
                 <div class="w-4 h-4 rounded-full bg-white shadow-sm transform transition-transform duration-300 {{ selectedToePatch() ? 'translate-x-4' : 'translate-x-0' }}"></div>
               </div>
             </div>
