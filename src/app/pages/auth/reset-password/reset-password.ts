@@ -12,16 +12,16 @@ import { LucideAngularModule, Loader2 } from 'lucide-angular';
   standalone: true,
   imports: [CommonModule, FormsModule, LucideAngularModule, TranslatePipe],
   template: `
-    <div class="animate-fade min-h-[80vh] flex items-center justify-center px-4 py-12">
+    <div class="animate-fade min-h-[80vh] flex items-center justify-center px-2 py-12">
       <div class="w-full max-w-[440px] p-8 md:p-[48px] rounded-2xl bg-white/90 backdrop-blur-[10px] border border-[rgba(28,76,138,0.1)] shadow-lg">
         <h2 class="text-3xl md:text-4xl font-black text-secondary mb-8 text-center mt-0">
           {{ 'auth.update_password' | translate }}
         </h2>
-        
+
         <form (submit)="handleUpdatePassword()" class="space-y-6">
           <div class="flex flex-col mb-5">
             <label class="block font-medium text-slate-700 mb-2 ml-1 text-[0.9rem]">{{ 'auth.new_password' | translate }}</label>
-            <input type="password" [ngModel]="password()" (ngModelChange)="password.set($event)" 
+            <input type="password" [ngModel]="password()" (ngModelChange)="password.set($event)"
                    name="password" required placeholder="******" autocomplete="new-password"
                    class="w-full py-[14px] px-4 border-2 border-black/5 rounded-xl text-[1.05rem] font-inherit bg-slate-50 transition-all duration-300 focus:outline-none focus:border-primary focus:bg-white focus:shadow-[0_0_0_4px_rgba(207,19,129,0.1)]">
           </div>
@@ -61,7 +61,7 @@ export class ResetPasswordComponent {
   private supabase = inject(SupabaseService);
   private router = inject(Router);
   i18n = inject(TranslationService);
-  
+
   readonly Loader2 = Loader2;
 
   password = signal('');

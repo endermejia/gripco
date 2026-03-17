@@ -1,4 +1,4 @@
-<div class="max-w-4xl mx-auto px-4 py-12 md:py-20 animate-fade">
+<div class="max-w-4xl mx-auto px-2 py-12 md:py-20 animate-fade">
   <!-- 1. Checkout Section (if cart has items) -->
   @if (cart.items().length > 0) {
     <section class="mb-20">
@@ -6,37 +6,37 @@
         <h2 class="text-3xl md:text-5xl font-black text-secondary mb-4">{{ 'cart.checkout' | translate }}</h2>
         <p class="text-slate-500 font-medium max-w-lg mx-auto">{{ 'orders.subtitle' | translate }}</p>
       </div>
-      
+
       <div class="p-8 md:p-12 bg-white/70 backdrop-blur-xl border border-white/40 shadow-2xl rounded-[32px] overflow-hidden">
         <div class="space-y-8">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="flex flex-col">
               <label class="flex items-center gap-2 font-black text-secondary mb-3 ml-1 text-sm uppercase tracking-widest">
-                <lucide-icon [name]="User" size="18" class="text-primary"></lucide-icon> 
+                <lucide-icon [name]="User" size="18" class="text-primary"></lucide-icon>
                 {{ 'auth.name' | translate }}
               </label>
-              <input type="text" [ngModel]="fullName()" (ngModelChange)="fullName.set($event)" 
-                     placeholder="Juan Pérez" 
+              <input type="text" [ngModel]="fullName()" (ngModelChange)="fullName.set($event)"
+                     placeholder="Juan Pérez"
                      class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl font-bold text-secondary focus:bg-white focus:border-primary focus:outline-none transition-all placeholder:text-slate-300">
             </div>
             <div class="flex flex-col">
               <label class="flex items-center gap-2 font-black text-secondary mb-3 ml-1 text-sm uppercase tracking-widest">
-                <lucide-icon [name]="Phone" size="18" class="text-primary"></lucide-icon> 
+                <lucide-icon [name]="Phone" size="18" class="text-primary"></lucide-icon>
                 {{ 'orders.phone' | translate }}
               </label>
-              <input type="tel" [ngModel]="phone()" (ngModelChange)="phone.set($event)" 
-                     placeholder="600 000 000" autocomplete="tel" 
+              <input type="tel" [ngModel]="phone()" (ngModelChange)="phone.set($event)"
+                     placeholder="600 000 000" autocomplete="tel"
                      class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl font-bold text-secondary focus:bg-white focus:border-primary focus:outline-none transition-all placeholder:text-slate-300">
             </div>
           </div>
-          
+
           <div class="flex flex-col">
             <label class="flex items-center gap-2 font-black text-secondary mb-3 ml-1 text-sm uppercase tracking-widest">
-              <lucide-icon [name]="MapPin" size="18" class="text-primary"></lucide-icon> 
+              <lucide-icon [name]="MapPin" size="18" class="text-primary"></lucide-icon>
               {{ 'orders.shipping_address' | translate }}
             </label>
-            <input type="text" [ngModel]="address()" (ngModelChange)="address.set($event)" 
-                   placeholder="Calle, Número, Piso, Ciudad y CP" autocomplete="street-address" 
+            <input type="text" [ngModel]="address()" (ngModelChange)="address.set($event)"
+                   placeholder="Calle, Número, Piso, Ciudad y CP" autocomplete="street-address"
                    class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl font-bold text-secondary focus:bg-white focus:border-primary focus:outline-none transition-all placeholder:text-slate-300">
           </div>
 
@@ -66,7 +66,7 @@
           </div>
 
           <div class="flex flex-col sm:flex-row gap-4 mt-8">
-            <button class="btn btn-primary flex-[2] py-6 text-xl" 
+            <button class="btn btn-primary flex-[2] py-6 text-xl"
                     (click)="submitOrder()" [disabled]="loading() || !fullName() || !address() || !phone()">
               @if (loading()) {
                 <div class="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
@@ -76,8 +76,8 @@
                 <lucide-icon [name]="CheckCircle" size="24"></lucide-icon>
               }
             </button>
-            
-            <button class="btn bg-slate-100 hover:bg-slate-200 text-slate-500 font-bold px-8 py-6 rounded-2xl flex-1 transition-all" 
+
+            <button class="btn bg-slate-100 hover:bg-slate-200 text-slate-500 font-bold px-8 py-6 rounded-2xl flex-1 transition-all"
                     (click)="clearCart()" [disabled]="loading()">
               <lucide-icon [name]="XCircle" size="20"></lucide-icon>
               <span>{{ 'orders.discard' | translate }}</span>
@@ -94,7 +94,7 @@
       <h2 class="text-2xl md:text-3xl font-black text-secondary uppercase tracking-tight">{{ 'orders.title' | translate }}</h2>
       <div class="h-1 w-20 bg-primary/20 rounded-full"></div>
     </div>
-    
+
     @defer (on viewport) {
       @if (orders().length === 0) {
         <div class="bg-white rounded-[32px] shadow-lg border border-slate-100 bg-slate-50 border-dashed border-2 border-slate-200 py-24 flex flex-col items-center justify-center text-center px-6">
@@ -122,7 +122,7 @@
                   </div>
                 </div>
                 <!-- Global Order Status Badge -->
-                <div class="px-5 py-2.5 rounded-full text-xs font-black tracking-widest uppercase shadow-sm flex items-center gap-2 transition-colors" 
+                <div class="px-5 py-2.5 rounded-full text-xs font-black tracking-widest uppercase shadow-sm flex items-center gap-2 transition-colors"
                      [ngClass]="getStatusClasses(order.status)">
                   <div class="w-2 h-2 rounded-full bg-current animate-pulse"></div>
                   {{ getStatusLabel(order.status) }}
@@ -157,7 +157,7 @@
                 </div>
                 <div class="flex flex-col items-end gap-3">
                   @if (order.status === 'pending_to_gripco') {
-                    <button (click)="cancelOrder(order.id)" 
+                    <button (click)="cancelOrder(order.id)"
                             class="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-red-400 hover:text-red-500 transition-colors cursor-pointer mr-1">
                       <lucide-icon [name]="XCircle" size="14"></lucide-icon>
                       {{ 'orders.cancel' | translate }}
@@ -183,7 +183,7 @@
 
   <!-- Logout Section -->
   <div class="mt-20 pt-10 border-t border-slate-100 flex flex-col items-center">
-    <button (click)="logout()" 
+    <button (click)="logout()"
             class="flex items-center gap-3 text-slate-400 font-bold px-8 py-4 rounded-2xl hover:bg-red-50 hover:text-red-500 transition-all duration-300 group">
       <lucide-icon [name]="LogOut" size="20" class="transition-transform group-hover:-translate-x-1"></lucide-icon>
       <span class="uppercase tracking-widest text-xs">{{ 'nav.logout' | translate }}</span>

@@ -183,9 +183,25 @@
     "es": "Actualizar",
     "en": "Refresh"
   },
+  "admin.id": {
+    "es": "Nº Pedido",
+    "en": "Order ID"
+  },
   "admin.client": {
     "es": "Cliente",
     "en": "Client"
+  },
+  "admin.items": {
+    "es": "Artículos",
+    "en": "Items"
+  },
+  "admin.total": {
+    "es": "Total",
+    "en": "Total"
+  },
+  "admin.status": {
+    "es": "Estado",
+    "en": "Status"
   },
   "admin.actions": {
     "es": "Acciones",

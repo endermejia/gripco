@@ -10,7 +10,7 @@ import { ModalComponent } from './components/shared/modal';
   imports: [RouterOutlet, HeaderComponent, CartSidebarComponent, ModalComponent],
   template: `
     <app-header></app-header>
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
       <router-outlet></router-outlet>
     </main>
     <app-cart-sidebar></app-cart-sidebar>
