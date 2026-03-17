@@ -31,7 +31,8 @@ export class AdminComponent implements OnInit {
     { value: 'resoling', label: 'status.resoling' },
     { value: 'pending_to_client', label: 'status.pending_to_client' },
     { value: 'sent_to_client', label: 'status.sent_to_client' },
-    { value: 'received_by_client', label: 'status.received_by_client' }
+    { value: 'received_by_client', label: 'status.received_by_client' },
+    { value: 'cancelled', label: 'status.cancelled' }
   ];
 
   ngOnInit() {
@@ -80,7 +81,8 @@ export class AdminComponent implements OnInit {
       'resoling': 'bg-yellow-50 text-yellow-600',
       'pending_to_client': 'bg-fuchsia-50 text-fuchsia-700',
       'sent_to_client': 'bg-sky-50 text-sky-700',
-      'received_by_client': 'bg-emerald-50 text-emerald-700'
+      'received_by_client': 'bg-emerald-50 text-emerald-700',
+      'cancelled': 'bg-red-50 text-red-600'
     };
     return map[status] || 'bg-slate-100 text-slate-500';
   }
