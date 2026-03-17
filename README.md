@@ -1,59 +1,121 @@
-# Gripco
+<div align="center">
+  <img src="public/gripco.svg" alt="Gripco Logo" width="250" />
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.2.
+  # Gripco
+  ### Por una escalada compatible con el medio.
 
-## Development server
+  [![Angular](https://img.shields.io/badge/Angular-21.2-dd0031.svg?style=flat-square&logo=angular)](https://angular.dev/)
+  [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.2-38B2AC.svg?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
+  [![Supabase](https://img.shields.io/badge/Supabase-Backend-3ECF8E.svg?style=flat-square&logo=supabase)](https://supabase.com/)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6.svg?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+</div>
 
-To start a local development server, run:
+---
+
+## 🧗‍♂️ Sobre Gripco (About)
+
+**Gripco** es una plataforma orientada a promover la **sostenibilidad en la escalada** mediante el servicio de **resolado y reparación de pies de gato**. En lugar de desechar tus gatos desgastados, Gripco les da una segunda vida, utilizando gomas de alta calidad (Vibram XS-Grip, XS-Edge, etc.) para mantener un rendimiento óptimo en la roca o en el rocódromo.
+
+<p align="center">
+  <img src="public/hero1.jpg" alt="Escalada Gripco" width="800" style="border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);" />
+</p>
+
+## ✨ Características (Features)
+
+*   👟 **Servicio Personalizado:** Selección detallada del tipo de goma (`XS-Grip`, `XS-Grip 2`, `XS-Edge`, etc.) y reparaciones adicionales (Punteras / Empeine).
+*   🛒 **Gestión de Cesta y Pedidos:** Los usuarios pueden agregar múltiples pares de zapatos a su carrito y tramitar un pedido completo.
+*   📦 **Seguimiento Completo:** Tracking del estado del pedido desde que sale del cliente, es recibido por Gripco, pasa a estado de resolado y vuelve al escalador.
+*   🌍 **Internacionalización (i18n):** Sistema de traducción personalizado integrado mediante un `TranslationService` y `TranslatePipe`.
+*   🛡️ **Autenticación Segura:** Acceso de usuarios registrado y perfiles protegidos mediante [Supabase](https://supabase.com/).
+*   🛠️ **Panel de Administración (Admin):** Área reservada para gestionar órdenes e inventario internamente.
+
+## 🛠️ Tecnologías Utilizadas (Tech Stack)
+
+### Frontend
+- **Framework:** [Angular 21](https://angular.dev/) (Standalone Components, Signals, nueva API `resource`).
+- **Estilos:** [Tailwind CSS v4](https://tailwindcss.com/) para diseño utilitario responsivo.
+- **Componentes:** [Taiga UI](https://taiga-ui.dev/) para interfaces de usuario ricas y accesibles.
+- **Iconos:** `lucide-angular`.
+- **Tests:** Vitest.
+
+### Backend y Base de Datos
+- **BaaS:** [Supabase](https://supabase.com/) (Autenticación, PostgreSQL, Políticas Row Level Security).
+
+## 🚀 Empezando (Getting Started)
+
+Sigue estos pasos para configurar el entorno de desarrollo en tu máquina local.
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/tu-usuario/gripco.git
+cd gripco
+```
+
+### 2. Instalar dependencias
+
+Asegúrate de tener [Node.js](https://nodejs.org/) instalado y ejecuta:
+
+```bash
+npm install
+```
+
+### 3. Configurar Variables de Entorno
+
+Deberás conectar la aplicación con tu proyecto de Supabase. Crea un archivo `src/environments/environment.ts` (y `environment.development.ts`) añadiendo tus credenciales:
+
+```typescript
+export const environment = {
+  production: false,
+  supabaseUrl: 'TU_SUPABASE_URL',
+  supabaseKey: 'TU_SUPABASE_ANON_KEY',
+  stripePublicKey: 'TU_STRIPE_PUBLIC_KEY' // Si aplica
+};
+```
+
+### 4. Servidor de Desarrollo
+
+Ejecuta el servidor local de Angular:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Abre tu navegador y ve a `http://localhost:4200/`. La aplicación se recargará automáticamente cada vez que cambies el código fuente.
 
-## Code scaffolding
+## 📸 Servicios Destacados
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+  <div>
+    <img src="public/xs-edge.jpg" alt="Vibram XS Edge" width="200" style="border-radius: 8px;" />
+    <p><b>Vibram XS-Edge</b></p>
+  </div>
+  <div>
+    <img src="public/puntera.jpg" alt="Reparación Puntera" width="200" style="border-radius: 8px;" />
+    <p><b>Reparación de Puntera</b></p>
+  </div>
+  <div>
+    <img src="public/xs-grip2.jpg" alt="Vibram XS Grip 2" width="200" style="border-radius: 8px;" />
+    <p><b>Vibram XS-Grip 2</b></p>
+  </div>
+</div>
 
-```bash
-ng generate component component-name
-```
+## 🏗️ Construcción (Build)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Para compilar el proyecto y generar los artefactos para producción, ejecuta:
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+Esto compilará el proyecto en la carpeta `dist/`. La configuración de producción, de manera predeterminada, optimizará todos los recursos.
 
-For end-to-end (e2e) testing, run:
+## 🤝 Contribuyendo (Contributing)
 
-```bash
-ng e2e
-```
+¡Las contribuciones son bienvenidas! Si deseas mejorar Gripco, por favor sube un Pull Request o abre un *Issue* para discutir los cambios que deseas implementar. Recordamos la política de estilo: mantener componentes _standalone_, usar Signals para la reactividad y las clases de Tailwind CSS en las vistas.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+<p align="center">
+  Hecho con ❤️ para la comunidad escaladora.
+</p>
