@@ -20,21 +20,13 @@ export class HomeComponent {
   private meta = inject(Meta);
   private title = inject(Title);
   readonly ShoppingCart = ShoppingCart;
-
-  rubberOptions = [
-    { name: 'XS Grip 4 mm', price: 28 },
-    { name: 'XS Grip 5 mm', price: 31 },
-    { name: 'XS Grip2 4 mm', price: 29 },
-    { name: 'XS Grip2 5 mm', price: 32 },
-    { name: 'XS Edge 4 mm', price: 29 },
-    { name: 'XS Edge 5 mm', price: 32 }
-  ];
+  rubberOptions = this.cart.rubberOptions;
 
   selectedRubber = signal(this.rubberOptions[0]);
   selectedToePatch = signal(false);
 
   currentPrice = computed(() => {
-    return this.selectedRubber().price + (this.selectedToePatch() ? 5 : 0);
+    return this.selectedRubber().price + (this.selectedToePatch() ? this.cart.TOE_PATCH_PRICE : 0);
   });
 
   constructor() {

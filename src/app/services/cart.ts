@@ -15,6 +15,16 @@ export interface CartItem {
 export class CartService {
   private storage = inject(StorageService);
   private CAT_KEY = 'gripco_cart';
+  readonly TOE_PATCH_PRICE = 5;
+
+  readonly rubberOptions = [
+    { name: 'XS Grip 4 mm', price: 28 },
+    { name: 'XS Grip 5 mm', price: 31 },
+    { name: 'XS Grip2 4 mm', price: 29 },
+    { name: 'XS Grip2 5 mm', price: 32 },
+    { name: 'XS Edge 4 mm', price: 29 },
+    { name: 'XS Edge 5 mm', price: 32 }
+  ];
 
   private _items = signal<CartItem[]>([]);
   private _isOpen = signal(false);
@@ -46,7 +56,7 @@ export class CartService {
   }
 
   addItem(rubber: string, price: number, toePatch: boolean) {
-    const itemTotal = price + (toePatch ? 5 : 0);
+    const itemTotal = price + (toePatch ? this.TOE_PATCH_PRICE : 0);
     const newItem: CartItem = {
       id: Math.random().toString(36).substring(2, 9),
       rubber,
