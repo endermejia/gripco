@@ -1,40 +1,132 @@
-<div class="hero-section animate-fade px-4 md:px-10 py-16 md:py-24">
-  <h1 class="text-4xl md:text-6xl font-black mb-6">{{ i18n.t()['hero.title'] }}</h1>
-  <p class="text-xl md:text-2xl opacity-90">{{ i18n.t()['hero.subtitle'] }}</p>
+<!-- Hero Section with Background Image -->
+<div class="animate-fade relative px-4 md:px-10 py-20 md:py-32 text-center rounded-3xl shadow-2xl mb-[60px] overflow-hidden flex flex-col items-center justify-center min-h-[400px]">
+  <div class="absolute inset-0 z-0">
+    <img src="hero2.jpg" alt="Climbing Background" class="w-full h-full object-cover object-center brightness-75">
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+  </div>
+  
+  <div class="relative z-10 w-full max-w-4xl mx-auto">
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-6 text-white tracking-tight drop-shadow-xl">{{ i18n.t()['hero.title'] }}</h1>
+    <p class="text-xl md:text-2xl text-slate-100 max-w-[800px] mx-auto leading-relaxed font-medium drop-shadow-md">{{ i18n.t()['hero.subtitle'] }}</p>
+  </div>
 </div>
 
-<div class="product-config animate-fade max-w-2xl mx-auto px-4">
-  <div class="product-card-single card glass p-6 md:p-10">
-    <div class="product-header mb-8">
-      <h2 class="text-3xl font-bold">{{ i18n.t()['product.title'] }}</h2>
+<!-- Configurator Section -->
+<div class="animate-fade max-w-5xl mx-auto px-4 pb-[80px]">
+  <div class="mb-12 text-center">
+    <h2 class="text-3xl md:text-5xl font-black text-secondary">{{ i18n.t()['product.title'] }}</h2>
+    <div class="h-1.5 w-24 bg-primary rounded-full mx-auto mt-6"></div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <!-- Visual Display Side -->
+    <div class="hidden lg:block lg:col-span-5 sticky top-24">
+      <div class="card bg-white p-4 rounded-3xl shadow-xl border border-slate-100 relative overflow-hidden group">
+        <div class="aspect-square rounded-2xl overflow-hidden bg-slate-50 relative">
+          <!-- Dynamic Image Based on Selection -->
+          @if (selectedRubber().name.includes('Edge')) {
+            <img src="xs-edge.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Vibram XS Edge">
+          } @else if (selectedRubber().name.includes('Grip2')) {
+            <img src="xs-grip2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Vibram XS Grip 2">
+          } @else {
+            <img src="xs-grip.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Vibram XS Grip">
+          }
+
+          <!-- Badge Overlay for Features -->
+          <div class="absolute bottom-4 left-4 right-4 flex gap-2">
+             <span class="bg-black/70 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-lg">{{ selectedRubber().name.split(' ')[0] }} {{ selectedRubber().name.split(' ')[1] }}</span>
+             @if (selectedToePatch()) {
+               <span class="bg-primary/90 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-lg animate-fade-in">+ PUNTERA</span>
+             }
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="config-body space-y-8">
-      <div class="form-group">
-        <label class="block text-sm font-semibold mb-3">{{ i18n.t()['product.select_rubber'] }}</label>
-        <select [ngModel]="selectedRubber()" (ngModelChange)="selectedRubber.set($event)" class="select-modern w-full">
-          @for (option of rubberOptions; track option.name) {
-            <option [ngValue]="option">{{ option.name }} ({{ option.price }}€)</option>
-          }
-        </select>
-      </div>
+    <!-- Configuration Form Side -->
+    <div class="lg:col-span-7 bg-white p-6 md:p-10 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 z-10">
+      
+      <div class="flex flex-col gap-8">
+        <!-- Rubber Selection Section -->
+        <div class="flex flex-col gap-4">
+          <label class="block font-black text-secondary text-lg uppercase tracking-tight">{{ i18n.t()['product.select_rubber'] }}</label>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            @for (option of rubberOptions; track option.name) {
+              <div class="relative cursor-pointer group" (click)="selectedRubber.set(option)">
+                <!-- Card Container -->
+                <div class="p-4 rounded-2xl border-2 transition-all duration-300 relative overflow-hidden h-full flex flex-col justify-between
+                            {{ selectedRubber().name === option.name ? 'border-primary bg-primary/5 shadow-md shadow-primary/10' : 'border-slate-100 bg-white hover:border-slate-300' }}">
+                  
+                  <div class="flex justify-between items-start mb-2">
+                    <span class="font-black text-secondary leading-tight">{{ option.name }}</span>
+                    <!-- Radio Indicator -->
+                    <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 
+                                {{ selectedRubber().name === option.name ? 'border-primary' : 'border-slate-300' }}">
+                      @if (selectedRubber().name === option.name) {
+                        <div class="w-2.5 h-2.5 bg-primary rounded-full animate-fade-in"></div>
+                      }
+                    </div>
+                  </div>
+                  <span class="text-sm font-bold text-slate-500 block mt-1">+{{ option.price }}€</span>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
 
-      <div class="form-group bg-slate-50 p-4 rounded-xl border border-slate-100 transition-colors hover:bg-white">
-        <label class="checkbox-container flex items-center cursor-pointer select-none">
-          <input type="checkbox" [ngModel]="selectedToePatch()" (ngModelChange)="selectedToePatch.set($event)" class="hidden">
-          <span class="checkmark mr-3"></span>
-          <span class="font-medium text-slate-700">{{ i18n.t()['product.toe_patch'] }}</span>
-        </label>
-      </div>
+        <!-- Extras Section -->
+        <div class="h-px bg-slate-100 w-full mt-2"></div>
 
-      <div class="price-display flex justify-between items-center py-6 border-y border-slate-100">
-        <span class="text-lg font-medium text-slate-600">{{ i18n.t()['product.total_price'] }}</span>
-        <span class="text-4xl font-black text-secondary">{{ currentPrice() }}€</span>
-      </div>
+        <div class="flex flex-col gap-4">
+          <label class="block font-black text-secondary text-lg uppercase tracking-tight">Extras</label>
+          
+          <!-- Toe Patch Addon -->
+          <label class="flex justify-between items-center cursor-pointer p-4 rounded-2xl border-2 transition-all duration-300 
+                        {{ selectedToePatch() ? 'border-primary bg-primary/5 shadow-md shadow-primary/10' : 'border-slate-100 bg-white hover:border-slate-300' }}">
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 rounded-xl overflow-hidden shrink-0 border border-slate-200">
+                <img src="puntera.jpg" class="w-full h-full object-cover">
+              </div>
+              <div class="flex flex-col">
+                <span class="font-black text-secondary">{{ i18n.t()['product.toe_patch'] }}</span>
+                <span class="text-xs font-medium text-slate-500 mt-1">Reconstrucción de la zona desgastada</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+              <span class="font-bold text-slate-500">+5€</span>
+              <div class="w-10 h-6 rounded-full p-1 transition-colors duration-300 {{ selectedToePatch() ? 'bg-primary' : 'bg-slate-200' }}">
+                <div class="w-4 h-4 rounded-full bg-white shadow-sm transform transition-transform duration-300 {{ selectedToePatch() ? 'translate-x-4' : 'translate-x-0' }}"></div>
+              </div>
+            </div>
+            <!-- Hidden input for binding (Optional since we use click directly on label, but good practice if needed) -->
+            <input type="checkbox" [ngModel]="selectedToePatch()" (ngModelChange)="selectedToePatch.set($event)" class="hidden">
+          </label>
+        </div>
 
-      <button class="btn btn-primary btn-large w-full py-5 text-xl" (click)="addToCart()">
-        {{ i18n.t()['common.add_to_cart'] }}
-      </button>
+        <!-- Checkout Summary Area -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-[24px] mt-4 shadow-2xl shadow-secondary/20 relative overflow-hidden">
+          <!-- Decorative element -->
+          <div class="absolute -right-10 -top-10 w-40 h-40 bg-white/5 rounded-full blur-2xl"></div>
+          
+          <div class="relative z-10 flex flex-col md:flex-row md:justify-between md:items-center gap-6">
+            <div class="flex flex-col">
+              <span class="text-slate-400 font-bold tracking-widest uppercase text-xs mb-1">{{ i18n.t()['product.total_price'] }}</span>
+              <div class="flex items-end gap-2">
+                <span class="text-4xl md:text-5xl font-black font-mono leading-none">{{ currentPrice() }}</span>
+                <span class="text-2xl font-bold text-slate-400 leading-tight">€</span>
+              </div>
+            </div>
+            
+            <button class="btn btn-primary w-full md:w-auto px-10 py-4 md:py-5 text-lg rounded-2xl hover:scale-105" (click)="addToCart()">
+              {{ i18n.t()['common.add_to_cart'] }}
+              <lucide-icon [name]="ShoppingCart" size="20" class="ml-1 opacity-90"></lucide-icon>
+            </button>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>

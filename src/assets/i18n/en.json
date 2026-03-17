@@ -18,6 +18,7 @@
   "cart.empty_desc": "Add some resoling to start!",
   "cart.shipping_notice": "Shipping expenses included",
   "cart.shipping_included": "Shipping included",
+  "common.add_to_cart": "Add to Cart",
   "auth.login": "Login",
   "auth.register": "Register",
   "auth.no_account": "Don't have an account?",

@@ -1,49 +1,49 @@
-<header class="glass">
-  <div class="header-content">
-    <div class="logo flex items-center shrink-0 cursor-pointer" routerLink="/">
-      <img src="gripco.svg" alt="GripCo Logo" class="logo-img h-12 md:h-14">
-      <span class="logo-text hidden lg:block text-2xl md:text-3xl font-black ml-3">GripCo</span>
+<header class="bg-white/70 backdrop-blur-xl border border-white/40 shadow-2xl sticky top-0 z-[1000] h-auto flex items-center p-2 m-2 rounded-[20px] transition-all duration-300 md:min-h-[80px] md:px-10 md:py-0 md:mx-5 md:my-[15px] md:rounded-[24px]">
+  <div class="w-full max-w-[1200px] mx-auto flex justify-between items-center">
+    <div class="flex items-center gap-3 cursor-pointer group shrink-0" routerLink="/">
+      <img src="gripco.svg" alt="GripCo Logo" class="h-12 md:h-[55px] w-auto transition-transform duration-300 group-hover:scale-105">
+      <span class="text-[1.8rem] font-black text-secondary tracking-[-1px] hidden lg:block ml-3">GripCo</span>
     </div>
 
     <!-- Navigation -->
-    <nav class="flex items-center gap-2 md:gap-6">
+    <nav class="flex items-center gap-6">
       <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" 
-         class="nav-link-resoling hidden md:flex items-center gap-2 font-bold p-2 rounded-lg transition-colors hover:bg-slate-50">
-        <span class="">{{ i18n.t()['nav.resoling'] }}</span>
+         class="text-slate-500 font-bold hidden md:flex items-center gap-2 p-2 rounded-lg transition-all duration-300 relative text-[1.05rem] hover:text-secondary hover:bg-slate-50 [&.active]:text-secondary [&.active]:bg-[rgba(28,76,138,0.05)] after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full [&.active]:after:w-full">
+        <span>{{ i18n.t()['nav.resoling'] }}</span>
       </a>
       
       @if (supabase.user()) {
         <a routerLink="/orders" routerLinkActive="active" 
-           class="flex items-center gap-2 font-bold p-2 rounded-lg transition-colors hover:bg-slate-50">
+           class="text-slate-500 font-bold flex items-center gap-2 p-2 rounded-lg transition-all duration-300 relative text-[1.05rem] hover:text-secondary hover:bg-slate-50 [&.active]:text-secondary [&.active]:bg-[rgba(28,76,138,0.05)] after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full [&.active]:after:w-full">
           <lucide-icon [name]="Archive" size="22"></lucide-icon>
           <span class="hidden md:inline">{{ i18n.t()['nav.orders'] }}</span>
         </a>
         @if (supabase.isAdmin()) {
           <a routerLink="/admin" routerLinkActive="active" 
-             class="flex items-center gap-2 font-bold p-2 rounded-lg transition-colors hover:bg-slate-50">
+             class="text-slate-500 font-bold flex items-center gap-2 p-2 rounded-lg transition-all duration-300 relative text-[1.05rem] hover:text-secondary hover:bg-slate-50 [&.active]:text-secondary [&.active]:bg-[rgba(28,76,138,0.05)] after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full [&.active]:after:w-full">
             <lucide-icon [name]="Settings" size="22"></lucide-icon>
             <span class="hidden md:inline">{{ i18n.t()['nav.admin'] }}</span>
           </a>
         }
-        <button class="btn-icon p-2 hover:bg-slate-50 rounded-lg" (click)="logout()">
+        <button class="bg-transparent border-none cursor-pointer text-slate-500 p-2 flex transition-colors duration-200 hover:text-primary hover:bg-slate-50 rounded-lg" (click)="logout()">
           <lucide-icon [name]="LogOut" size="22"></lucide-icon>
         </button>
       } @else {
-        <a routerLink="/auth" class="btn btn-primary px-3 py-2 md:px-6 md:py-3 text-sm flex items-center">
-          <lucide-icon [name]="User" size="22" class="md:-ml-1"></lucide-icon>
-          <span class="hidden md:inline ml-2">{{ i18n.t()['nav.login'] }}</span>
+        <a routerLink="/auth" class="btn btn-primary rounded-xl px-4 py-2.5 md:px-6 md:py-3 text-[0.95rem] hover:scale-105">
+          <lucide-icon [name]="User" size="20"></lucide-icon>
+          <span class="hidden md:inline">{{ i18n.t()['nav.login'] }}</span>
         </a>
       }
 
-      <button class="btn-icon lang-toggle flex items-center gap-1 p-2" (click)="i18n.toggleLang()">
+      <button class="bg-transparent border-none cursor-pointer text-slate-500 flex items-center gap-1 p-2 hover:text-primary transition-colors duration-200" (click)="i18n.toggleLang()">
         <lucide-icon [name]="Languages" size="20"></lucide-icon>
-        <span class="lang-code text-xs font-bold">{{ i18n.lang() | uppercase }}</span>
+        <span class="text-xs font-bold">{{ i18n.lang() | uppercase }}</span>
       </button>
 
-      <button class="btn-cart relative bg-slate-100 hover:bg-white p-3 rounded-xl transition-all" (click)="cart.toggleCart()">
+      <button class="bg-slate-50 border-none rounded-xl w-12 h-12 flex justify-center items-center cursor-pointer relative transition-all duration-200 hover:bg-white hover:-translate-y-0.5 hover:shadow-lg" (click)="cart.toggleCart()">
         <lucide-icon [name]="ShoppingCart" size="24"></lucide-icon>
         @if (cart.count() > 0) {
-          <span class="badge absolute -top-1 -right-1 bg-primary text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">
+          <span class="absolute -top-[5px] -right-[5px] bg-primary text-white text-[0.75rem] font-bold px-[6px] py-[2px] rounded-full min-w-[20px] text-center border-2 border-white">
             {{ cart.count() }}
           </span>
         }

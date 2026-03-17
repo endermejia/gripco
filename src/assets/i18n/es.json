@@ -18,6 +18,7 @@
   "cart.empty_desc": "¡Añade algún resolado para empezar!",
   "cart.shipping_notice": "Gastos de envío incluidos",
   "cart.shipping_included": "Gastos de envío incluidos",
+  "common.add_to_cart": "Añadir al Carrito",
   "auth.login": "Iniciar Sesión",
   "auth.register": "Registrarse",
   "auth.no_account": "¿No tienes cuenta?",

@@ -10,8 +10,7 @@ import { Router } from '@angular/router';
   selector: 'app-cart-sidebar',
   standalone: true,
   imports: [CommonModule, LucideAngularModule],
-  templateUrl: './cart-sidebar.html',
-  styleUrl: './cart-sidebar.css'
+  templateUrl: './cart-sidebar.html'
 })
 export class CartSidebarComponent {
   cart = inject(CartService);

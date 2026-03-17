@@ -1,6 +1,7 @@
 import { Component, inject, signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
 import { Meta, Title } from '@angular/platform-browser';
 import { CartService } from '../../services/cart';
 import { SupabaseService } from '../../services/supabase';
@@ -9,9 +10,8 @@ import { TranslationService } from '../../services/translation';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './home.html',
-  styleUrl: './home.css'
+  imports: [CommonModule, FormsModule, LucideAngularModule],
+  templateUrl: './home.html'
 })
 export class HomeComponent {
   cart = inject(CartService);
@@ -19,6 +19,7 @@ export class HomeComponent {
   i18n = inject(TranslationService);
   private meta = inject(Meta);
   private title = inject(Title);
+  readonly ShoppingCart = ShoppingCart;
 
   rubberOptions = [
     { name: 'XS Grip 4 mm', price: 28 },

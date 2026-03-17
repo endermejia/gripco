@@ -19,8 +19,7 @@ import {
   selector: 'app-header',
   standalone: true,
   imports: [CommonModule, RouterModule, LucideAngularModule],
-  templateUrl: './header.html',
-  styleUrl: './header.css'
+  templateUrl: './header.html'
 })
 export class HeaderComponent {
   supabase = inject(SupabaseService);

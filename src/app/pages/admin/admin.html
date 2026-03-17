@@ -1,8 +1,8 @@
-<div class="admin-container animate-fade p-4 md:p-8 max-w-7xl mx-auto">
+<div class="animate-fade p-4 md:p-8 max-w-7xl mx-auto">
   <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
     <h1 class="text-3xl md:text-4xl font-black text-secondary">{{ i18n.t()['admin.title'] }}</h1>
     <button class="btn btn-secondary px-6" (click)="fetchOrders()" [disabled]="loading()">
-      <lucide-icon [name]="RefreshCw" size="18" [class.spinning]="loading()"></lucide-icon>
+      <lucide-icon [name]="RefreshCw" size="18" [class.animate-spin]="loading()"></lucide-icon>
       <span class="ml-2">{{ i18n.t()['admin.refresh'] }}</span>
     </button>
   </div>
@@ -47,8 +47,8 @@
                 <span class="text-lg font-black text-secondary">{{ order.total_price }}€</span>
               </td>
               <td class="p-6">
-                <div class="order-status px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider inline-block" 
-                     [attr.data-status]="order.status">
+                <div class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider inline-block transition-colors" 
+                     [ngClass]="getStatusClasses(order.status)">
                   {{ getStatusLabel(order.status) }}
                 </div>
               </td>

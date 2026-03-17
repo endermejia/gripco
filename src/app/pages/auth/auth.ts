@@ -4,18 +4,20 @@ import { FormsModule } from '@angular/forms';
 import { SupabaseService } from '../../services/supabase';
 import { TranslationService } from '../../services/translation';
 import { Router } from '@angular/router';
+import { LucideAngularModule, Loader2 } from 'lucide-angular';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './auth.html',
-  styleUrl: './auth.css'
+  imports: [CommonModule, FormsModule, LucideAngularModule],
+  templateUrl: './auth.html'
 })
 export class AuthComponent {
   private supabase = inject(SupabaseService);
   private router = inject(Router);
   i18n = inject(TranslationService);
+  
+  readonly Loader2 = Loader2;
 
   isLogin = signal(true);
   email = signal('');
