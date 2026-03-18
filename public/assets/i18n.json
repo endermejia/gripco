@@ -143,6 +143,14 @@
     "es": "Dirección de Envío",
     "en": "Shipping Address"
   },
+  "orders.notes": {
+    "es": "Notas del Pedido",
+    "en": "Order Notes"
+  },
+  "orders.notes_placeholder": {
+    "es": "Ej: XS Grip2 para los Solution, XS Edge para los Miura...",
+    "en": "E.g.: XS Grip2 for the Solution, XS Edge for the Miura..."
+  },
   "orders.phone": {
     "es": "Teléfono",
     "en": "Phone"

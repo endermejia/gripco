@@ -5,7 +5,7 @@ import { SupabaseService } from '../../services/supabase';
 import { TranslationService } from '../../services/translation';
 import { ModalService } from '../../services/modal';
 import { TranslatePipe } from '../../services/translate.pipe';
-import { LucideAngularModule, RefreshCw, ChevronDown, Search } from 'lucide-angular';
+import { LucideAngularModule, RefreshCw, ChevronDown, Search, MessageSquare } from 'lucide-angular';
 
 @Component({
   selector: 'app-admin',
@@ -21,6 +21,7 @@ export class AdminComponent implements OnInit {
   readonly RefreshCw = RefreshCw;
   readonly ChevronDown = ChevronDown;
   readonly Search = Search;
+  readonly MessageSquare = MessageSquare;
 
   orders = signal<any[]>([]);
   searchQuery = signal('');

@@ -6,7 +6,7 @@ import { CartService } from '../../services/cart';
 import { TranslationService } from '../../services/translation';
 import { ModalService } from '../../services/modal';
 import { TranslatePipe } from '../../services/translate.pipe';
-import { LucideAngularModule, MapPin, Phone, User, Package, Clock, Truck, CheckCircle, ShoppingCart, Trash2, Archive, Settings, LogOut, XCircle } from 'lucide-angular';
+import { LucideAngularModule, MapPin, Phone, User, MessageSquare, Package, Clock, Truck, CheckCircle, ShoppingCart, Trash2, Archive, Settings, LogOut, XCircle } from 'lucide-angular';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
@@ -26,6 +26,7 @@ export class OrdersComponent {
   readonly MapPin = MapPin;
   readonly Phone = Phone;
   readonly User = User;
+  readonly MessageSquare = MessageSquare;
   readonly Package = Package;
   readonly Clock = Clock;
   readonly Truck = Truck;
@@ -39,6 +40,7 @@ export class OrdersComponent {
   address = signal('');
   phone = signal('');
   fullName = signal('');
+  notes = signal('');
   
   loading = signal(false);
   orders = signal<any[]>([]);
@@ -88,6 +90,7 @@ export class OrdersComponent {
         .insert({
           user_id: userId,
           total_price: this.cart.total(),
+          notes: this.notes(),
           shipping_address: {
             full_name: this.fullName(),
             address: this.address(),
@@ -115,6 +118,7 @@ export class OrdersComponent {
 
       // 3. Clear cart and refresh
       this.cart.clearCart();
+      this.notes.set('');
       await this.fetchOrders();
       this.modal.show({
         title: this.i18n.translate('orders.summary'),

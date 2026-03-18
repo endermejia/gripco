@@ -63,6 +63,7 @@ CREATE TABLE orders (
   status TEXT DEFAULT 'pending_to_gripco' CHECK (status IN ('pending_to_gripco', 'sent_to_gripco', 'received_at_gripco', 'resoling', 'pending_to_client', 'sent_to_client', 'received_by_client', 'cancelled')),
   total_price DECIMAL(10, 2) NOT NULL,
   shipping_address JSONB NOT NULL,
+  notes TEXT,
   stripe_payment_intent_id TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
