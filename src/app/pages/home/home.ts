@@ -23,6 +23,20 @@ export class HomeComponent {
   readonly ShoppingCart = ShoppingCart;
   rubberOptions = this.cart.rubberOptions;
 
+  displayRubberOptions = this.rubberOptions.map(option => {
+    // Assuming format is always like "XS Grip 4 mm"
+    const parts = option.name.split(' ');
+    const thicknessIndex = parts.findIndex(p => !isNaN(parseFloat(p)));
+
+    if (thicknessIndex !== -1) {
+      const name = parts.slice(0, thicknessIndex).join(' ');
+      const thickness = parts.slice(thicknessIndex).join(' ');
+      return { ...option, displayName: name, thickness };
+    }
+
+    return { ...option, displayName: option.name, thickness: '' };
+  });
+
   selectedRubber = signal(this.rubberOptions[0]);
   selectedToePatch = signal(false);
 
