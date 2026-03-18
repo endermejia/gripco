@@ -182,14 +182,14 @@ export class OrdersComponent {
 
   getStatusClasses(status: string): string {
     const map: Record<string, string> = {
-      'pending_to_gripco': 'bg-[#fff0f7] text-primary',
-      'sent_to_gripco': 'bg-indigo-50 text-secondary',
-      'received_at_gripco': 'bg-green-50 text-green-600',
-      'resoling': 'bg-yellow-50 text-yellow-600',
-      'pending_to_client': 'bg-fuchsia-50 text-fuchsia-700',
-      'sent_to_client': 'bg-sky-50 text-sky-700',
-      'received_by_client': 'bg-emerald-50 text-emerald-700',
-      'cancelled': 'bg-red-50 text-red-600'
+      'pending_to_gripco': 'bg-slate-100 text-slate-600',
+      'sent_to_gripco': 'bg-indigo-50 text-indigo-600',
+      'received_at_gripco': 'bg-blue-50 text-blue-600',
+      'resoling': 'bg-amber-100 text-amber-700',
+      'pending_to_client': 'bg-violet-50 text-violet-600',
+      'sent_to_client': 'bg-sky-50 text-sky-600',
+      'received_by_client': 'bg-emerald-100 text-emerald-700',
+      'cancelled': 'bg-red-100 text-red-700'
     };
     return map[status] || 'bg-slate-100 text-slate-500';
   }

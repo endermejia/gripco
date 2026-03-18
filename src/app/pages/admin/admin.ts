@@ -1,11 +1,11 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, computed, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SupabaseService } from '../../services/supabase';
 import { TranslationService } from '../../services/translation';
 import { ModalService } from '../../services/modal';
 import { TranslatePipe } from '../../services/translate.pipe';
-import { LucideAngularModule, RefreshCw, ChevronDown } from 'lucide-angular';
+import { LucideAngularModule, RefreshCw, ChevronDown, Search } from 'lucide-angular';
 
 @Component({
   selector: 'app-admin',
@@ -20,9 +20,40 @@ export class AdminComponent implements OnInit {
   
   readonly RefreshCw = RefreshCw;
   readonly ChevronDown = ChevronDown;
+  readonly Search = Search;
 
   orders = signal<any[]>([]);
+  searchQuery = signal('');
   loading = signal(false);
+
+  private normalizeStr(str: string): string {
+    return (str || '')
+      .toLowerCase()
+      .trim()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
+
+  filteredOrders = computed(() => {
+    const query = this.normalizeStr(this.searchQuery());
+    const all = this.orders();
+    
+    if (!query) return all;
+
+    return all.filter(order => {
+      const idStr = this.normalizeStr(order.id);
+      const nameStr = this.normalizeStr(order.shipping_address?.full_name);
+      const emailStr = this.normalizeStr(order.profiles?.email);
+      const phoneStr = this.normalizeStr(order.shipping_address?.phone);
+      const addressStr = this.normalizeStr(order.shipping_address?.address);
+
+      return idStr.includes(query) || 
+             nameStr.includes(query) || 
+             emailStr.includes(query) || 
+             phoneStr.includes(query) ||
+             addressStr.includes(query);
+    });
+  });
 
   statusOptions = [
     { value: 'pending_to_gripco', label: 'status.pending_to_gripco' },
@@ -75,14 +106,14 @@ export class AdminComponent implements OnInit {
 
   getStatusClasses(status: string): string {
     const map: Record<string, string> = {
-      'pending_to_gripco': 'bg-[#fff0f7] text-primary',
-      'sent_to_gripco': 'bg-indigo-50 text-secondary',
-      'received_at_gripco': 'bg-green-50 text-green-600',
-      'resoling': 'bg-yellow-50 text-yellow-600',
-      'pending_to_client': 'bg-fuchsia-50 text-fuchsia-700',
-      'sent_to_client': 'bg-sky-50 text-sky-700',
-      'received_by_client': 'bg-emerald-50 text-emerald-700',
-      'cancelled': 'bg-red-50 text-red-600'
+      'pending_to_gripco': 'bg-slate-100 text-slate-600',
+      'sent_to_gripco': 'bg-indigo-50 text-indigo-600',
+      'received_at_gripco': 'bg-blue-50 text-blue-600',
+      'resoling': 'bg-amber-100 text-amber-700',
+      'pending_to_client': 'bg-violet-50 text-violet-600',
+      'sent_to_client': 'bg-sky-50 text-sky-600',
+      'received_by_client': 'bg-emerald-100 text-emerald-700',
+      'cancelled': 'bg-red-100 text-red-700'
     };
     return map[status] || 'bg-slate-100 text-slate-500';
   }

@@ -20,25 +20,33 @@
 
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
     <!-- Visual Display Side -->
-    <div class="lg:col-span-5 lg:sticky lg:top-24">
+    <div class="lg:col-span-5 lg:sticky lg:top-24 hidden lg:block">
       <div class="card bg-white p-4 rounded-3xl shadow-xl border border-slate-100 relative overflow-hidden group">
-        <div class="aspect-square rounded-2xl overflow-hidden bg-slate-50 relative">
+        <div class="aspect-square rounded-2xl overflow-hidden bg-slate-50 relative flex items-center justify-center">
           <!-- Dynamic Image Based on Selection -->
-          @if (selectedRubber().name.includes('Edge')) {
-            <img src="xs-edge.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Vibram XS Edge">
-          } @else if (selectedRubber().name.includes('Grip2')) {
-            <img src="xs-grip2.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Vibram XS Grip 2">
-          } @else {
-            <img src="xs-grip.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Vibram XS Grip">
-          }
+          @if (selectedRubber()) {
+            <img [src]="selectedRubber().image"
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 animate-fade-in"
+                 [alt]="selectedRubber().name">
 
-          <!-- Badge Overlay for Features -->
-          <div class="absolute bottom-4 left-4 right-4 flex gap-2">
-             <span class="bg-black/70 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-lg">{{ selectedRubber().name.split(' ')[0] }} {{ selectedRubber().name.split(' ')[1] }}</span>
-             @if (selectedToePatch()) {
-               <span class="bg-primary/90 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-lg animate-fade-in">+ PUNTERA</span>
-             }
-          </div>
+            <!-- Badge Overlay for Features -->
+            <div class="absolute bottom-4 left-4 right-4 flex gap-2">
+               <span class="bg-black/70 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-lg">{{ selectedRubber().name }}</span>
+               @if (selectedToePatch()) {
+                 <span class="bg-primary/90 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-lg animate-fade-in">+ PUNTERA</span>
+               }
+            </div>
+          } @else {
+            <!-- Hero state for desktop visual when no selection -->
+            <div class="relative w-full h-full rounded-2xl overflow-hidden animate-fade-in group">
+               <img src="hero1.jpg" class="w-full h-full object-cover brightness-75 transition-transform duration-[20s] group-hover:scale-110" alt="Gripco Selection">
+               <div class="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent flex flex-col items-center justify-center text-center p-8">
+                  <lucide-icon [name]="ShoppingCart" size="40" class="text-white/50 mb-4"></lucide-icon>
+                  <span class="text-white font-black text-xs uppercase tracking-[0.4em] drop-shadow-lg">{{ 'product.select_rubber' | translate }}</span>
+                  <div class="h-1 w-10 bg-primary rounded-full mt-4"></div>
+               </div>
+            </div>
+          }
         </div>
       </div>
     </div>
@@ -51,24 +59,38 @@
         <div class="flex flex-col gap-4">
           <label class="block font-black text-secondary text-lg uppercase tracking-tight">{{ 'product.select_rubber' | translate }}</label>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            @for (option of rubberOptions; track option.name) {
-              <div class="relative cursor-pointer group" (click)="selectedRubber.set(option)">
-                <!-- Card Container -->
-                <div class="p-4 rounded-2xl border-2 transition-all duration-300 relative overflow-hidden h-full flex flex-col justify-between
-                            {{ selectedRubber().name === option.name ? 'border-primary bg-primary/5 shadow-md shadow-primary/10' : 'border-slate-100 bg-white hover:border-slate-300' }}">
+          <div class="grid grid-cols-2 gap-4">
+            @for (option of rubberOptions; track option) {
+              <div class="relative cursor-pointer group transition-all duration-500 ease-in-out
+                          {{ selectedRubber() === option ? 'max-md:col-span-2' : '' }}"
+                   (click)="selectedRubber.set(option)">
 
-                  <div class="flex justify-between items-start mb-2">
-                    <span class="font-black text-secondary leading-tight">{{ option.name }}</span>
-                    <!-- Radio Indicator -->
+                <!-- Card Container -->
+                <div class="p-4 rounded-2xl border-2 transition-all duration-500 relative overflow-hidden h-full flex flex-col
+                            {{ selectedRubber() === option ? 'border-primary bg-primary/5 shadow-lg' : 'border-slate-100 bg-white hover:border-slate-300' }}">
+
+                  <!-- Mobile Image: Shown above text only when selected -->
+                  <div class="lg:hidden w-full overflow-hidden transition-all duration-500 ease-in-out
+                              {{ selectedRubber() === option ? 'max-h-[400px] mb-4' : 'max-h-0' }}">
+                     <img [src]="option.image" class="w-full h-auto max-h-[400px] object-contain rounded-xl bg-slate-50/50">
+                  </div>
+
+                  <div class="flex justify-between items-start">
+                    <div class="flex flex-col">
+                      <span class="font-black text-secondary leading-tight">{{ option.name }}</span>
+                      <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">{{ option.thickness }} mm</span>
+                    </div>
+
+                    <!-- Radio Indicator (Desktop only usually in these designs, keeping it) -->
                     <div class="w-5 h-5 rounded-full border-2 hidden md:flex items-center justify-center shrink-0
-                                {{ selectedRubber().name === option.name ? 'border-primary' : 'border-slate-300' }}">
-                      @if (selectedRubber().name === option.name) {
+                                {{ selectedRubber() === option ? 'border-primary' : 'border-slate-300' }}">
+                      @if (selectedRubber() === option) {
                         <div class="w-2.5 h-2.5 bg-primary rounded-full animate-fade-in"></div>
                       }
                     </div>
                   </div>
-                  <span class="text-sm font-bold text-slate-500 block mt-1">+{{ option.price }}€</span>
+
+                  <span class="text-xs font-black text-primary block mt-auto pt-2">+{{ option.price }}€</span>
                 </div>
               </div>
             }
@@ -119,7 +141,8 @@
               </div>
             </div>
 
-            <button class="btn btn-primary w-full md:w-auto px-10 py-4 md:py-5 text-lg rounded-2xl hover:scale-105" (click)="addToCart()">
+            <button class="btn btn-primary w-full md:w-auto px-10 py-4 md:py-5 text-lg rounded-2xl hover:scale-105 disabled:opacity-50 disabled:grayscale disabled:scale-100" 
+                    (click)="addToCart()" [disabled]="!selectedRubber()">
               {{ 'common.add_to_cart' | translate }}
               <lucide-icon [name]="ShoppingCart" size="20" class="ml-1 opacity-90"></lucide-icon>
             </button>

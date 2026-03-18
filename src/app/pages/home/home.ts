@@ -23,22 +23,31 @@ export class HomeComponent {
   readonly ShoppingCart = ShoppingCart;
   rubberOptions = this.cart.rubberOptions;
 
-  selectedRubber = signal(this.rubberOptions[0]);
+  selectedRubber = signal<any>(null);
   selectedToePatch = signal(false);
-
+ 
   currentPrice = computed(() => {
-    return this.selectedRubber().price + (this.selectedToePatch() ? this.cart.TOE_PATCH_PRICE : 0);
+    const rubber = this.selectedRubber();
+    if (!rubber) return 0;
+    return rubber.price + (this.selectedToePatch() ? this.cart.TOE_PATCH_PRICE : 0);
   });
-
+ 
   constructor() {
     effect(() => {
       this.title.setTitle(this.i18n.translate('home.seo_title'));
       this.meta.updateTag({ name: 'description', content: this.i18n.translate('home.seo_desc') });
     });
   }
-
+ 
   addToCart() {
     const rubber = this.selectedRubber();
-    this.cart.addItem(rubber.name, rubber.price, this.selectedToePatch());
+    if (!rubber) return;
+    
+    const fullName = `${rubber.name} ${rubber.thickness}mm`;
+    this.cart.addItem(fullName, rubber.price, this.selectedToePatch());
+    
+    // Reset form
+    this.selectedRubber.set(null);
+    this.selectedToePatch.set(false);
   }
 }

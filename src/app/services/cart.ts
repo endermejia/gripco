@@ -18,12 +18,12 @@ export class CartService {
   readonly TOE_PATCH_PRICE = 5;
 
   readonly rubberOptions = [
-    { name: 'XS Grip 4 mm', price: 28 },
-    { name: 'XS Grip 5 mm', price: 31 },
-    { name: 'XS Grip2 4 mm', price: 29 },
-    { name: 'XS Grip2 5 mm', price: 32 },
-    { name: 'XS Edge 4 mm', price: 29 },
-    { name: 'XS Edge 5 mm', price: 32 }
+    { name: 'XS Grip', thickness: 4, price: 28, image: 'xs-grip.jpg' },
+    { name: 'XS Grip', thickness: 5, price: 31, image: 'xs-grip.jpg' },
+    { name: 'XS Grip2', thickness: 4, price: 29, image: 'xs-grip2.jpg' },
+    { name: 'XS Grip2', thickness: 5, price: 32, image: 'xs-grip2.jpg' },
+    { name: 'XS Edge', thickness: 4, price: 29, image: 'xs-edge.jpg' },
+    { name: 'XS Edge', thickness: 5, price: 32, image: 'xs-edge.jpg' }
   ];
 
   private _items = signal<CartItem[]>([]);

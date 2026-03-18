@@ -183,6 +183,10 @@
     "es": "Actualizar",
     "en": "Refresh"
   },
+  "admin.search_placeholder": {
+    "es": "Buscar por cliente, email, teléfono o pedido...",
+    "en": "Search by client, email, phone or order..."
+  },
   "admin.id": {
     "es": "Nº Pedido",
     "en": "Order ID"
@@ -190,6 +194,10 @@
   "admin.client": {
     "es": "Cliente",
     "en": "Client"
+  },
+  "admin.shipping_address": {
+    "es": "Dirección",
+    "en": "Address"
   },
   "admin.items": {
     "es": "Artículos",
