@@ -151,6 +151,14 @@
     "es": "Notas del Pedido",
     "en": "Order Notes"
   },
+  "orders.repeat": {
+    "es": "Repetir Pedido",
+    "en": "Repeat Order"
+  },
+  "orders.repeat_success": {
+    "es": "Tu pedido anterior ha sido cargado en el carrito. Por favor, revisa los datos de envío y las notas antes de finalizar.",
+    "en": "Your previous order has been loaded into the cart. Please review the shipping details and notes before finalizing."
+  },
   "orders.editable": {
     "es": "Editable (Haz clic para cambiar)",
     "en": "Editable (Click to change)"

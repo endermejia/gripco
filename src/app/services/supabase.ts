@@ -49,6 +49,20 @@ export class SupabaseService {
     return { data, error };
   }
 
+  async updateProfile(userId: string, updates: any) {
+    const { data, error } = await this.supabase
+      .from('profiles')
+      .update(updates)
+      .eq('id', userId)
+      .select()
+      .single();
+
+    if (data) {
+      this._profile.set(data);
+    }
+    return { data, error };
+  }
+
   get client() {
     return this.supabase;
   }

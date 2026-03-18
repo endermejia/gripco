@@ -5,8 +5,9 @@ import { SupabaseService } from '../../services/supabase';
 import { CartService } from '../../services/cart';
 import { TranslationService } from '../../services/translation';
 import { ModalService } from '../../services/modal';
+import { StorageService } from '../../services/storage';
 import { TranslatePipe } from '../../services/translate.pipe';
-import { LucideAngularModule, MapPin, Phone, User, MessageSquare, Package, Clock, Truck, CheckCircle, ShoppingCart, Trash2, Archive, Settings, LogOut, XCircle, Save } from 'lucide-angular';
+import { LucideAngularModule, MapPin, Phone, User, MessageSquare, Package, Clock, Truck, CheckCircle, ShoppingCart, Trash2, Archive, Settings, LogOut, XCircle, Save, RefreshCcw } from 'lucide-angular';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
@@ -21,6 +22,9 @@ export class OrdersComponent {
   i18n = inject(TranslationService);
   private modal = inject(ModalService);
   private router = inject(Router);
+  private storage = inject(StorageService);
+
+  private STORAGE_KEY = 'gripco_checkout_info';
 
   // Icons
   readonly MapPin = MapPin;
@@ -36,6 +40,7 @@ export class OrdersComponent {
   readonly LogOut = LogOut;
   readonly XCircle = XCircle;
   readonly Save = Save;
+  readonly RefreshCcw = RefreshCcw;
 
   // Form State
   address = signal('');
@@ -47,17 +52,44 @@ export class OrdersComponent {
   orders = signal<any[]>([]);
 
   constructor() {
+    // 1. Load from storage FIRST
+    const saved = this.storage.getItem(this.STORAGE_KEY);
+    if (saved) {
+      try {
+        const data = JSON.parse(saved);
+        this.address.set(data.address || '');
+        this.phone.set(data.phone || '');
+        this.fullName.set(data.fullName || '');
+        this.notes.set(data.notes || '');
+      } catch (e) {
+        console.error('Error parsing saved checkout info', e);
+      }
+    }
+
+    // 2. Persist changes to storage
+    effect(() => {
+      this.storage.setItem(this.STORAGE_KEY, JSON.stringify({
+        address: this.address(),
+        phone: this.phone(),
+        fullName: this.fullName(),
+        notes: this.notes()
+      }));
+    });
+
+    // 3. Fallback to profile ONLY if storage was empty
     effect(() => {
       const user = this.supabase.user();
-      if (user) {
+      if (user && !saved) {
         this.fetchOrders();
-        // Pre-fill profile if exists
         const profile = this.supabase.profile();
         if (profile) {
           this.address.set(profile.address || '');
           this.phone.set(profile.phone || '');
           this.fullName.set(profile.full_name || '');
         }
+      } else if (user) {
+        // Still need to fetch orders regardless of storage
+        this.fetchOrders();
       }
     });
   }
@@ -75,6 +107,17 @@ export class OrdersComponent {
 
     if (data) {
       this.orders.set(data);
+
+      // Pre-fill from last order if individual fields are empty
+      if (data.length > 0) {
+        const lastOrder = data[0];
+        const addr = lastOrder.shipping_address;
+        if (addr) {
+          if (!this.fullName()) this.fullName.set(addr.full_name || '');
+          if (!this.address()) this.address.set(addr.address || '');
+          if (!this.phone()) this.phone.set(addr.phone || '');
+        }
+      }
     }
   }
 
@@ -103,7 +146,16 @@ export class OrdersComponent {
 
       if (orderError) throw orderError;
 
-      // 2. Create order items
+      // 2. Update profile for consistency (if address/phone/name changed)
+      if (userId) {
+        await this.supabase.updateProfile(userId, {
+          full_name: this.fullName(),
+          address: this.address(),
+          phone: this.phone()
+        });
+      }
+
+      // 3. Create order items
       const items = this.cart.items().map(item => ({
         order_id: order.id,
         rubber_type: item.rubber,
@@ -179,6 +231,34 @@ export class OrdersComponent {
     if (confirmed) {
       this.cart.clearCart();
     }
+  }
+
+  async repeatOrder(order: any) {
+    // 1. Clear current cart
+    this.cart.clearCart();
+    
+    // 2. Add items
+    order.order_items.forEach((item: any) => {
+      const basePrice = Number(item.price) - (item.has_toe_patch ? this.cart.TOE_PATCH_PRICE : 0);
+      this.cart.addItem(item.rubber_type, basePrice, !!item.has_toe_patch);
+    });
+    
+    // 3. Pre-fill form
+    const addr = order.shipping_address;
+    if (addr) {
+      this.fullName.set(addr.full_name || '');
+      this.address.set(addr.address || '');
+      this.phone.set(addr.phone || '');
+    }
+    this.notes.set(order.notes || '');
+    
+    // 4. Feedback
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.modal.show({
+      title: 'GripCo',
+      message: this.i18n.translate('orders.repeat_success'),
+      type: 'success'
+    });
   }
 
   async updateNotes(orderId: string, notes: string) {
