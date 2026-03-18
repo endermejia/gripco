@@ -22,6 +22,9 @@ export class HomeComponent {
   private title = inject(Title);
   readonly ShoppingCart = ShoppingCart;
   rubberOptions = this.cart.rubberOptions;
+  
+  heroImages = ['hero1.jpg', 'hero2.jpg'];
+  currentHeroIndex = signal(0);
 
   selectedRubber = signal<any>(null);
   selectedToePatch = signal(false);
@@ -33,6 +36,10 @@ export class HomeComponent {
   });
  
   constructor() {
+    setInterval(() => {
+      this.currentHeroIndex.update(idx => (idx + 1) % this.heroImages.length);
+    }, 5000);
+
     effect(() => {
       this.title.setTitle(this.i18n.translate('home.seo_title'));
       this.meta.updateTag({ name: 'description', content: this.i18n.translate('home.seo_desc') });

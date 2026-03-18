@@ -90,6 +90,11 @@
             <lucide-icon [name]="User" size="20"></lucide-icon>
           </button>
         }
+
+        <button class="w-full mt-4 py-3 text-xs font-black text-slate-400 uppercase tracking-widest hover:text-secondary transition-colors"
+                (click)="cart.closeCart()">
+          {{ 'cart.continue_shopping' | translate }}
+        </button>
       </div>
     }
 </aside>

@@ -48,8 +48,12 @@
     "en": "Total"
   },
   "cart.checkout": {
-    "es": "Tramitar Pedido",
+    "es": "Finalizar Pedido",
     "en": "Checkout"
+  },
+  "cart.continue_shopping": {
+    "es": "Seguir Comprando",
+    "en": "Continue Shopping"
   },
   "cart.item": {
     "es": "item",

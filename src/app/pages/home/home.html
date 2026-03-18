@@ -1,8 +1,14 @@
 <!-- Hero Section with Background Image -->
 <div class="animate-fade relative px-2 md:px-10 py-20 md:py-32 text-center rounded-3xl shadow-2xl mb-[60px] overflow-hidden flex flex-col items-center justify-center min-h-[400px]">
-  <div class="absolute inset-0 z-0">
-    <img src="hero2.jpg" alt="Climbing Background" class="w-full h-full object-cover object-center brightness-75">
-    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+  <div class="absolute inset-0 z-0 bg-slate-900">
+    @for (img of heroImages; track img; let i = $index) {
+      <img [src]="img" 
+           class="w-full h-full object-cover transition-opacity duration-1000 brightness-50 absolute inset-0"
+           [class.opacity-100]="currentHeroIndex() === i"
+           [class.opacity-0]="currentHeroIndex() !== i"
+           alt="GripCo Hero Background">
+    }
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-black/20"></div>
   </div>
 
   <div class="relative z-10 w-full max-w-4xl mx-auto">
@@ -75,19 +81,9 @@
                      <img [src]="option.image" class="w-full h-auto max-h-[400px] object-contain rounded-xl bg-slate-50/50">
                   </div>
 
-                  <div class="flex justify-between items-start">
-                    <div class="flex flex-col">
-                      <span class="font-black text-secondary leading-tight">{{ option.name }}</span>
-                      <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">{{ option.thickness }} mm</span>
-                    </div>
-
-                    <!-- Radio Indicator (Desktop only usually in these designs, keeping it) -->
-                    <div class="w-5 h-5 rounded-full border-2 hidden md:flex items-center justify-center shrink-0
-                                {{ selectedRubber() === option ? 'border-primary' : 'border-slate-300' }}">
-                      @if (selectedRubber() === option) {
-                        <div class="w-2.5 h-2.5 bg-primary rounded-full animate-fade-in"></div>
-                      }
-                    </div>
+                  <div class="flex flex-col">
+                    <span class="font-black text-secondary leading-tight">{{ option.name }}</span>
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">{{ option.thickness }} mm</span>
                   </div>
 
                   <span class="text-xs font-black text-primary block mt-auto pt-2">+{{ option.price }}€</span>
@@ -104,25 +100,30 @@
           <label class="block font-black text-secondary text-lg uppercase tracking-tight">Extras</label>
 
           <!-- Toe Patch Addon -->
-          <label class="flex justify-between items-center cursor-pointer p-4 rounded-2xl border-2 transition-all duration-300
-                        {{ selectedToePatch() ? 'border-primary bg-primary/5 shadow-md shadow-primary/10' : 'border-slate-100 bg-white hover:border-slate-300' }}">
-            <div class="flex items-center gap-4">
-              <div class="w-16 h-16 rounded-xl overflow-hidden shrink-0 border border-slate-200">
-                <img src="puntera.jpg" class="w-full h-full object-cover">
+          <label class="flex flex-col md:flex-row justify-between items-stretch md:items-center cursor-pointer p-4 md:p-6 rounded-3xl border-2 transition-all duration-300
+                        {{ selectedToePatch() ? 'border-primary bg-primary/5 shadow-xl shadow-primary/10' : 'border-slate-100 bg-white hover:border-slate-300' }}">
+            <div class="flex flex-col md:flex-row items-stretch md:items-center gap-4 md:gap-6">
+              <!-- Responsive Image Container -->
+              <div class="rounded-2xl overflow-hidden shrink-0 transition-all duration-500
+                          {{ selectedToePatch() ? 'h-48 md:h-36 grow md:w-36 border border-slate-200 bg-slate-50 mb-4 md:mb-0' : 'h-0 md:h-20 md:w-20 md:border md:border-slate-100' }}
+                          max-md:{{ selectedToePatch() ? 'block' : 'hidden' }}">
+                <img src="puntera.jpg" class="w-full h-full object-cover transition-all duration-500"
+                     [class.object-contain]="selectedToePatch()">
               </div>
-              <div class="flex flex-col">
-                <span class="font-black text-secondary">{{ 'product.toe_patch' | translate }}</span>
-                <span class="text-xs font-medium text-slate-500 mt-1">Reconstrucción de la zona desgastada</span>
+
+              <div class="flex flex-col justify-center">
+                <span class="font-black text-secondary text-lg leading-tight">{{ 'product.toe_patch' | translate }}</span>
+                <span class="text-xs md:text-sm font-medium text-slate-500 mt-1">Reconstrucción de la zona desgastada del gato</span>
               </div>
             </div>
 
-            <div class="flex items-center gap-4">
-              <span class="font-bold text-slate-500">+{{ cart.TOE_PATCH_PRICE }}€</span>
-              <div class="w-10 h-6 rounded-full p-1 transition-colors duration-300 hidden md:block {{ selectedToePatch() ? 'bg-primary' : 'bg-slate-200' }}">
-                <div class="w-4 h-4 rounded-full bg-white shadow-sm transform transition-transform duration-300 {{ selectedToePatch() ? 'translate-x-4' : 'translate-x-0' }}"></div>
+            <div class="flex items-center justify-between md:justify-end gap-6 mt-4 md:mt-0 pt-4 md:pt-0 border-t md:border-t-0 border-slate-200/50">
+              <div class="flex flex-col items-start md:items-end">
+                <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest leading-none mb-1">Precio extra</span>
+                <span class="font-black text-primary text-xl">+{{ cart.TOE_PATCH_PRICE }}€</span>
               </div>
             </div>
-            <!-- Hidden input for binding (Optional since we use click directly on label, but good practice if needed) -->
+            <!-- Hidden input for binding -->
             <input type="checkbox" [ngModel]="selectedToePatch()" (ngModelChange)="selectedToePatch.set($event)" class="hidden">
           </label>
         </div>
