@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, effect } from '@angular/core';
+import { Component, inject, signal, computed, effect, afterNextRender } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
@@ -36,13 +36,30 @@ export class HomeComponent {
   });
  
   constructor() {
-    setInterval(() => {
-      this.currentHeroIndex.update(idx => (idx + 1) % this.heroImages.length);
-    }, 5000);
+    afterNextRender(() => {
+      setInterval(() => {
+        this.currentHeroIndex.update(idx => (idx + 1) % this.heroImages.length);
+      }, 5000);
+
+      this.preloadImages();
+    });
 
     effect(() => {
       this.title.setTitle(this.i18n.translate('home.seo_title'));
       this.meta.updateTag({ name: 'description', content: this.i18n.translate('home.seo_desc') });
+    });
+  }
+
+  private preloadImages() {
+    const images = [
+      ...this.heroImages,
+      'puntera.jpg',
+      ...new Set(this.cart.rubberOptions.map(opt => opt.image))
+    ];
+    
+    images.forEach(src => {
+      const img = new Image();
+      img.src = src;
     });
   }
  
