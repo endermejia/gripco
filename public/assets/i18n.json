@@ -147,6 +147,14 @@
     "es": "Notas del Pedido",
     "en": "Order Notes"
   },
+  "orders.editable": {
+    "es": "Editable (Haz clic para cambiar)",
+    "en": "Editable (Click to change)"
+  },
+  "orders.save": {
+    "es": "Guardar Notas",
+    "en": "Save Notes"
+  },
   "orders.notes_placeholder": {
     "es": "Ej: XS Grip2 para los Solution, XS Edge para los Miura...",
     "en": "E.g.: XS Grip2 for the Solution, XS Edge for the Miura..."

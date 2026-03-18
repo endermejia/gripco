@@ -6,7 +6,7 @@ import { CartService } from '../../services/cart';
 import { TranslationService } from '../../services/translation';
 import { ModalService } from '../../services/modal';
 import { TranslatePipe } from '../../services/translate.pipe';
-import { LucideAngularModule, MapPin, Phone, User, MessageSquare, Package, Clock, Truck, CheckCircle, ShoppingCart, Trash2, Archive, Settings, LogOut, XCircle } from 'lucide-angular';
+import { LucideAngularModule, MapPin, Phone, User, MessageSquare, Package, Clock, Truck, CheckCircle, ShoppingCart, Trash2, Archive, Settings, LogOut, XCircle, Save } from 'lucide-angular';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
@@ -35,6 +35,7 @@ export class OrdersComponent {
   readonly Trash2 = Trash2;
   readonly LogOut = LogOut;
   readonly XCircle = XCircle;
+  readonly Save = Save;
 
   // Form State
   address = signal('');
@@ -177,6 +178,19 @@ export class OrdersComponent {
 
     if (confirmed) {
       this.cart.clearCart();
+    }
+  }
+
+  async updateNotes(orderId: string, notes: string) {
+    const { error } = await this.supabase.client
+      .from('orders')
+      .update({ notes })
+      .eq('id', orderId);
+
+    if (error) {
+      this.modal.show({ title: 'Error', message: error.message, type: 'error' });
+    } else {
+      await this.fetchOrders();
     }
   }
 
